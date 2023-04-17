@@ -168,6 +168,16 @@ def getinfobyid(packet , user_id , client):
     name = get_info(user_id)
     stat = get_status(user_id)
     if "id" not in name:
+        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]أيدي الاعب : [FFA500]""")
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]أيدي الاعب : [FFA500]""")
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2_clan(packet , f"""[00FF00][b][c]{user_id}""")
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{user_id}""")
+        client.send(bytes.fromhex(pyload_3))
+        
+        #
         pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]إسم لاعب : [FFA500]""")
         client.send(bytes.fromhex(pyload_3))
         pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]إسم لاعب : [FFA500]""")
@@ -178,6 +188,7 @@ def getinfobyid(packet , user_id , client):
         client.send(bytes.fromhex(pyload_3))
         
         ##
+
         
         
         pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]حالة الاعب : """)
@@ -186,13 +197,6 @@ def getinfobyid(packet , user_id , client):
         client.send(bytes.fromhex(pyload_3))
         client.send(bytes.fromhex(pyload_3))
         
-        time.sleep(4.0)
-        #login
-        pyload_3 = gen_msgv2_clan(packet , f"""[FF0F26FF][b][c]جاري تسجيل دخول الحساب...""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[FF0F26FF][b][c]جاري تسجيل دخول الحساب...""")
-        client.send(bytes.fromhex(pyload_3))
-        client.send(bytes.fromhex(pyload_3))
         
         
         #
