@@ -792,7 +792,7 @@ class Proxy:
                                     
                                     
 #           /5
-                                if '0f00' in dataS.hex()[0:4] 
+                                if '0f00' in dataS.hex()[0:4] and inviteD==True : 
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c]تحويل وضع سكواد 5 ")))
                                     client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]تحويل وضع سكواد 5 "))))
 
