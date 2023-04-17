@@ -44,11 +44,11 @@ def get_status(id):
     a = "0"
     if  a in r.text :
         #acount ban
-        return ("Account Clear !" )
+        return ("متصل !" )
         
     else : 
         #acount clear
-        return ('Account Ban ! ')
+        return ('هنالك أنشطة غير طبيعية في حسابك. تم تعليقه ! ')
         
         
 def get_info(user_id):
