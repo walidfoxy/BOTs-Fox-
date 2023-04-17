@@ -33,24 +33,26 @@ ca=False
 socktion =None
 
 def str2hex(s:str):
+    
     return ''.join([hex(ord(c))[2:].zfill(2) for c in s])    
 def get_status(id):
     from time import sleep
+    import requests
     
     
     r= requests.get('https://ff.garena.com/api/antihack/check_banned?lang=en&uid={}'.format(id)) 
     a = "0"
     if  a in r.text :
-        #acount clean
-        return ("[00ff00]Account Clean !" )
+        #acount ban
+        return ("Account Clear !" )
         
     else : 
-        #acount ban
-        return ('[ff0000]Account Ban ! ')
+        #acount clear
+        return ('Account Ban ! ')
         
         
 def get_info(user_id):
-    
+    import requests
     id = user_id
     cookies = {
         '_ga': 'GA1.1.2123120599.1674510784',
@@ -156,8 +158,8 @@ def gen_msgv2(packet  , replay):
 
 def getinfobyid(packet , user_id , client):
     
-    load = gen_msgv2(packet , """[FFC800][b][c]Player Info !""")
-    load2 =gen_msgv2_clan(packet , """[FFC800][b][c]Player Info ! """) 
+    load = gen_msgv2(packet , """[00FFFF][b][c]Player Info -->>""")
+    load2 =gen_msgv2_clan(packet , """[00FFFF][b][c]Player Info -->> """) 
     for i in range(1):
         time.sleep(1.5)
         client.send(bytes.fromhex(load))
@@ -166,73 +168,25 @@ def getinfobyid(packet , user_id , client):
     name = get_info(user_id)
     stat = get_status(user_id)
     if "id" not in name:
-    
-
-            #uid
-        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]Player UID -->>""")
+        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]Player Name -->> [FFA500]{name}""")
         client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]Player UID -->>""")
-        client.send(bytes.fromhex(pyload_3))
-        #uid
-        pyload_3 = gen_msgv2_clan(packet , f"""[00ff00][b][c]{user_id}""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00ff00][b][c]{user_id}""")
-        client.send(bytes.fromhex(pyload_3))
-        client.send(bytes.fromhex(pyload_3))
-    
-    #name
-        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]Player Name -->>""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]Player Name -->>""")
-        client.send(bytes.fromhex(pyload_3))
-        #name-end
-        pyload_3 = gen_msgv2_clan(packet , f"""[00FF00][b][c]{name}""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{name}""")
-        client.send(bytes.fromhex(pyload_3))
-    #stat
-        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]Player Status -->>""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]Player Status -->>""")
-        client.send(bytes.fromhex(pyload_3))
-        #stat
-        pyload_3 = gen_msgv2_clan(packet , f"""[00ff00][b][c]{stat}""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00ff00][b][c]{stat}""")
-        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]Player Name -->> [FFA500]{name}""")
         client.send(bytes.fromhex(pyload_3))
         
-        
-        
-        
-
-        
-        
-        
+        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]Status : [00ff00][b][c] {stat}""")
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]Status : [00ff00][b][c] {stat}""")
+        client.send(bytes.fromhex(pyload_3))
+        client.send(bytes.fromhex(pyload_3))
 
     else:
-    #name
-        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]Player Name -->>""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]Player Name -->>""")
-        client.send(bytes.fromhex(pyload_3))
-        #name-end
-        
-        pyload_1 = str(gen_msgv2_clan(packet , f"""[00FF00][b][c]{name}"""))
+        pyload_1 = str(gen_msgv2_clan(packet , f"""[00FFFF][b][c]Player Name -->> [FFA500]{name}"""))
         client.send(bytes.fromhex(pyload_1))
-        pyload_1 = str(gen_msgv2(packet , f"""[00FF00][b][c]{name}"""))
+        pyload_1 = str(gen_msgv2(packet , f"""[00FFFF][b][c]Player Name -->> [FFA500]{name}"""))
         client.send(bytes.fromhex(pyload_1))
-            #name
-           
-        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]Player Name -->>""")
+        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]Player Name -->> [FFA500]{name}""")
         client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]Player Name -->>""")
-        client.send(bytes.fromhex(pyload_3))
-        #name-end
-        
-        pyload_3 = gen_msgv2_clan(packet , f"""[00FF00][b][c]{name}""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{name}""")
+        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]Player Name -->> [FFA500]{name}""")
         client.send(bytes.fromhex(pyload_3))
         
 
@@ -292,7 +246,7 @@ def spam(server,packet):
     while True:
 
 
-        time.sleep(0.001)
+        time.sleep(0.015)
 
 
         server.send(packet)
@@ -312,7 +266,6 @@ def destroy(remote,dataC):
             
             remote.send(dataC)
     time.sleep(0.5)
-
 
 
 
@@ -709,8 +662,8 @@ class Proxy:
                                 #spam_invite
                                 if '1200' in dataS.hex()[0:4] and '2f646573' in dataS.hex()[0:900] : 
                                     
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c]Destroy Sqoud -->> [00ff00][b][c] ON")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]Destroy Sqoud -->> [00ff00][b][c] ON"))))
+                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c]تدمير سكواد <<-- [00ff00][b][c] م")))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]تدمير سكواد <<-- [00ff00][b][c] مفعل"))))
                                     inviteD =True
                                     time.sleep(3.5)
                                     
@@ -748,16 +701,20 @@ class Proxy:
                                     #invite_spam OFF
                                 if '1200' in dataS.hex()[0:4] and '2f2d646573' in dataS.hex()[0:900] :
                                     inviteD =False
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[FF0000][b][c]Stopped !")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[FF0000][b][c]Stopped ! "))))                       
+                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[FF0000][b][c]توقفت !")))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[FF0000][b][c]توقفت ! "))))                       
                                     
                                         #level_ON       
                                                                      
                                 if '1200' in dataS.hex()[0:4] and '3f6c766c' in dataS.hex()[0:900] :
                                     increase =True
                                     print("Level Is Starting Now ")
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]Start Game !!")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]Start Game !! "))))
+                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]زيادة لفل مفعل !!")))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]زيادة لفل مفعل !! "))))
+                                    
+                                    time.sleep(2.0)
+                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]المود : [171dcd][b][c] ذئب وحيد")))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]المود : [171dcd][b][c] ذئب وحيد"))))
                                     
                                     time.sleep(3.5)
                                     
@@ -773,8 +730,8 @@ class Proxy:
                                 #level_OFF
                                 if '1200' in dataS.hex()[0:4] and '3f2d6c766c' in dataS.hex()[0:900] :
                                     increase =False
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[FF0000][b][c]Stopped !")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[FF0000][b][c]Stopped !"))))
+                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[FF0000][b][c]توقفت !")))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[FF0000][b][c]توقفت !"))))
                                     
                                    
                                    
@@ -783,8 +740,8 @@ class Proxy:
                                 #spy_last_sqoud
                                 if '1200' in dataS.hex()[0:4] and '2f737079' in dataS.hex()[0:900] :
 
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]You Are Invisible Now !")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]You Are Invisible Now !"))))
+                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]اصمت أنت فوضع التجسس !")))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]أصمت أنت فوضع التجسس !"))))
                                     socktion.send(packet)
                                     
                                     time.sleep(3.5)
@@ -798,8 +755,8 @@ class Proxy:
                                     
 #           /5
                                 if '1200' in dataS.hex()[0:4] and '2f35' in dataS.hex()[0:900]:
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c] Send Mode 5 ok!")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]Send Mode 5 ok!"))))
+                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c]تحويل وضع سكواد 5 ")))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]تحويل وضع سكواد 5 "))))
 
                                     invite.send(bytes.fromhex("0503000001d01fb578313150905babcef51dd24ed75fd0a24b024bd1429646114bc22e604afd35a96fbc48710b2d9cfec4378287ec829e33a78608fd2dd138d4d24a19c00fbfdc9f15c77ff86d638b34de95bd886e3075e82d3f4a3888f9b6943463022c43fb90e229f0eaf8a788f6f766d891d99eb2c37b277144923212810b3c80d1c521790154ed270f5241adc136f2a22816e0bc84fcaf79386b27559de966aa788c184d35bbbfaa03a5f08746f8db0e73b2c91ec4515d61f689a0cad30a7cbd6c325151e879dabc43d506b3240abe41bc0d6b4416c18f68ef4af2d04c381be6bf586f6b25727c0c85c03a579137e4a6c602ef6d833dabdab3eba3a5266e5a4731fbfb1720b60f124cd8fd4fa26cc7a9fb6e0a218d8809f57b204d22fa97520aeb99007c7b71c709e53ecc688c9963e0786909152fa93f06dc93085468dae34e1609f33f7dee228fb058c6efd6846b50ac54db0aebb8f5bc2f6751f9e2886dbab41cbaf5a1d8cd88e6c13a2a2a56b613a2d32179dc3f781493a5027322ac0cb1a2d3c79d49fb12ed26230e1561df43d315a27be17b5debdba757803305252b5443f3d77cd319dde9c49a72c636d93d02bdd9597168f378aa6e41d0fd545abf8bc0883f3dac11ea27166683c7111a0f329bf6b6a5"))
 
@@ -807,8 +764,8 @@ class Proxy:
     
                                
                                 if '1200' in dataS.hex()[0:4] and '2f34' in dataS.hex()[0:900]:
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c] Send Mode 4 ok!")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]Send Mode 4 ok!"))))
+                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c] تحويل وضع سكواد 4 ")))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]تحويل وضع سكواد 4 "))))
 
                                     invite.send(bytes.fromhex("0515000001c07906415ee12e4a169ec5633b54581771e13cd08077f10f76e5b7d2706c90b2b8bb5167a9832b2b4179e50f4dc8e20c3ac72ac7e2fd3bc9f9c21148d6b8107c8ed0c6377d23d0f2f3f7635c4a2ee5db6f544f8a6b9e5ca136a5d0678ab752e42380d10428c3fdaf4abc66d58456f6a67960fcb1e4b2bcb80721c6bb3c56698dc5a0944e4fff46bb57030590106b45520169c9ca422f2d1f04e067d4b0b3ddfa162c5dc3156ff11a5df872133ee1f9fd332f1a9df55edba27eebe0ae48de1a97893304765ebe4637be65b82df04ba8180681e68bc905347613bdf200e8435aeafcb1bdbcbc2c5b8a210f05907226b797f336fc9ee7df553e2edaa8d15682828304b922b1913890e4eb273d0550438bc227a35b0d76e28cacc14fb4aee6ad831f8d132610644152be8f0b5a3b9816ae65a004ddb64980ac36403ade91afd383a85930c8e153d7da457ccc4988047a63277a378e34defd3741b38cd34c133bcb1cb836ee79ae0c4da968d6453bb31edb8d083ed3f2b309cdbf96c0eb5f849f9ef9ac4bbeb6f43631b637fe86a6e2ba5c5ec75013535b473d3028a62a5f27614ac3b0ae60774c60acbf6b7006b89f90d5331075391cde7da017d088cfb470aab95d2b"))
                                     
@@ -822,8 +779,8 @@ class Proxy:
 
                                
                                 if '1200' in dataS.hex()[0:4] and '2f32' in dataS.hex()[0:900]:
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c] Send Mode 2 ok!")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]Send Mode 2 ok!"))))
+                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c] تحويل وضع سكواد 2")))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]تحويل وضع سكواد 2"))))
 
                                     invite.send(bytes.fromhex("0515000001c041b8f4aed5883a2ccdc22f2549c3751974a8f2bcacace88c156ee69911475b14104d4e09027a0d296458125320915cf6512c040d648d8f4c59c57d1e6ba5e098545c39bb37ea0be6e5b3a288d974acb2afbc1836f83061d4e5e291c683bb44911e08860e700c7be5d40578712805a8e99b3317d4d06cf42573ad9094f1091bf30f4238afd51a4989d5dc4efbe5d447b079fd3e8ea08e7942baea11f449068c89826a4928abfcdaf55aa99bdda35f8d61c2277156df051c123e3571e2fd2356b574195bd2b28f03480b3cdb1712bebec6029546faf87e816fdc688c67c1264f06b8513145f75132edb7d811300541fdccbdc3161f2dba96eff6640293e35e6c44ed3334ef785b0d3808073f393981bc572da04223a217cc68af8c9b5a0df472aa16e2c449973727236e990936fc86bdc9acec5efc5af6b31ee36a15e0e09aff0f8ef239e5e9affc7d589d1c3b08dd13f6b9b2f44a7163dbef02643945af4cb201b31530bb3fef1c7bb55a44cb7cd04fd9bb5a76f9625eccc733f7513cd5541632ffb5a8753fb6e0dea1b77b51c828835276fa8668a7a0bb0e584a021e2ea5610747b38b1c3eaf17d918b7f848487aee5ee41517dadfc587f5f21cd996d440f23e"))
 
@@ -831,8 +788,8 @@ class Proxy:
 
 
                                 if '1200' in dataS.hex()[0:4] and '2f6c6167' in dataS.hex()[0:900] and spaming:
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c]Your Message -->")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]Your Message -->"))))
+                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c]تكرار رسالتك : <--")))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]تكرار رسالتك : <--"))))
 
                                     
                                     
@@ -841,16 +798,16 @@ class Proxy:
      
                                 if '1200' in dataS.hex()[0:4] and '2f2d6c6167' in dataS.hex()[0:900]:
                                     recordmode=False
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[FF0000][b][c]Stopped !")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[FF0000][b][c]Stopped !"))))
+                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[FF0000][b][c]توقفت !")))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[FF0000][b][c]توقفت !"))))
                                     
                                     #back_one_time
                                 if '1200' in dataS.hex()[0:4]:
                                     if b"/back" in dataS:
                                         back=True
                                         threading.Thread(target=self.foxy , args=(self.data_join,)).start()
-                                        client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]back ok!")))
-                                        client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]Back ok!"))))
+                                        client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]تم إسترجاعك ")))
+                                        client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]تم إسترجاعك "))))
 
 
                                     statues= False
@@ -864,8 +821,8 @@ class Proxy:
                                     if b"/ca" in dataS:
                                         ca=True
                                         threading.Thread(target=self.walid , args=(self.data_join,)).start()
-                                        client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]back ok!")))
-                                        client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]back ok!"))))
+                                        client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]اللعب الإجباري ")))
+                                        client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]اللعب الإجباري "))))
                                         client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]The Foxy Official [FFC800][b][c]Ⓥ")))
                                         client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]The Foxy Official [FFC800][b][c]Ⓥ"))))
 
@@ -879,8 +836,8 @@ class Proxy:
                                     if b"/-ca" in dataS:
                                         ca=False
 
-                                        client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]stop ok!")))
-                                        client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]stop ok!"))))
+                                        client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]توقفت !")))
+                                        client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]توقفت !"))))
                                         client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]The Foxy Official [FFC800][b][c]Ⓥ")))
                                         client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]The Foxy Official [FFC800][b][c]Ⓥ"))))
 
@@ -893,8 +850,8 @@ class Proxy:
                                         time.sleep(30.0)
                                         ca=False
 
-                                        client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]Stopped Auto!")))
-                                        client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]Stopped Auto!"))))
+                                        client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]توقفت تلقائيا ! !")))
+                                        client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]توقفت تلقائيا !!"))))
                                  
                                  #uid
 
@@ -937,7 +894,7 @@ class Proxy:
         while back==True:
             try:
                 self.op.send(data_join)
-                time.sleep(999999999999999)
+                time.sleep(9999.0)
                
                 #                           0515000000104903408b9e91774e75b990038dddee49
             except Exception as e:
