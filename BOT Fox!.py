@@ -710,7 +710,7 @@ class Proxy:
                                     increase =True
                                     print("Level Is Starting Now ")
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]زيادة لفل مفعل !!")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]زيادة لفل مفعل !! "))))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]زيادة لفل  !! "))))
                                     
                                     time.sleep(2.0)
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]المود : [171dcd][b][c] ذئب وحيد")))
