@@ -48,7 +48,7 @@ def get_status(id):
         
     else : 
         #acount clear
-        return ('هنالك أنشطة غير طبيعية في حسابك. تم تعليقه ! ')
+        return ('تم تعليقه .')
         
         
 def get_info(user_id):
