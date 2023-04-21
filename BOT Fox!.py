@@ -959,13 +959,12 @@ class Proxy:
                                         hide = False
 
                                  #جلب
-                                if '0500' in dataS.hex()[0:4] and len(dataS.hex()) > int(1820.1231234234223) and len(dataS.hex()) < int(2000.3242354352345235) and spy == True:
-          
+                                if '0500' in dataS.hex()[0:4] and len(dataS.hex()) > int(1820.1231234234223) and len(dataS.hex()) < int(2000.3242354352345235) and len(dataS.hex())>= 1000:
                                     hidr = dataS
                                     cliee = client
                                     print("Catch Packet Sucess !")
                                     print("paket--->",dataS.hex())
-                                if '1200' in dataS.hex()[0:4] and '2F77616C6964' in dataS.hex() :
+                                if '1200' in dataS.hex()[0:4] and '/try' in dataS.hex() :
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c] تم سترجاعه للمجموعة !")))
                                     client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]تم سترجاعه للمجموعة ! "))))
                                     
