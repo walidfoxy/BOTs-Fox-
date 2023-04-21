@@ -267,7 +267,7 @@ recordmode= False
 sendpackt=False
 global vares
 vares = 0
-spy = True
+spy = False
 inviteD=False
 inviteE=False
 op = None
@@ -957,10 +957,9 @@ class Proxy:
                                         packet = dataS
 
                                         hide = False
-                                        
-                                        
-                               #جلب
-                                if '0500' in dataS.hex()[0:4] and len(dataS.hex())>  int(1820.1231234234223) and len(dataS.hex()) < int(2000.3242354352345235):
+
+                                 #جلب
+                                if '0500' in dataS.hex()[0:4] and len(dataS.hex())>= 1000:
                                     hidr = dataS
                                     cliee = client
                                     print("Catch Packet Sucess !")
