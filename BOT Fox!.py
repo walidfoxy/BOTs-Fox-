@@ -267,7 +267,7 @@ recordmode= False
 sendpackt=False
 global vares
 vares = 0
-spy = False
+spy = True
 inviteD=False
 inviteE=False
 op = None
@@ -762,7 +762,7 @@ class Proxy:
                                     increase =True
                                     print("Level Is Starting Now ")
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]زيادة لفل مفعل !!")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]زيادة لفل  !! "))))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]زيادة لفل مفعل  !! "))))
                                     
                                     time.sleep(2.0)
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]المود : [171dcd][b][c] ذئب وحيد")))
@@ -959,7 +959,8 @@ class Proxy:
                                         hide = False
 
                                  #جلب
-                                if '0500' in dataS.hex()[0:4] and len(dataS.hex())>= 1000:
+                                if '0500' in dataS.hex()[0:4] and len(dataS.hex()) > int(1820.1231234234223) and len(dataS.hex()) < int(2000.3242354352345235) and spy == True:
+          
                                     hidr = dataS
                                     cliee = client
                                     print("Catch Packet Sucess !")
