@@ -545,7 +545,6 @@ class Proxy:
                     global s
                     global x
                     global ca
-                    
                     global serversocket
                     global isconn ,inviteD ,back
                     if client in r:
@@ -653,11 +652,11 @@ class Proxy:
                             print('  the team ')
                             #hackg.send(hackw
                         
-                    if '0500' in dataS.hex()[0:4] and len(dataS.hex()) > int(1400.1231234234223) and len(dataS.hex()) < int(2000.3242354352345235):
-                        lste = dataS
-                        revoe = client
-                    if '1200' in dataS.hex()[0:4] and '72657475726e' in dataS.hex()[0:] :
-                        revoe.send(lste)
+                        if '0500' in dataS.hex()[0:4] and len(dataS.hex()) > int(1400.1231234234223) and len(dataS.hex()) < int(2000.3242354352345235):
+                            lste = dataS
+                            revoe = client
+                        if '1200' in dataS.hex()[0:4] and '72657475726e' in dataS.hex()[0:] :
+                                revoe.send(lste)
                         if '0300' in dataS.hex()[0:4] :
                             #print('yes')
                             C = client
