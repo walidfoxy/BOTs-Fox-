@@ -276,7 +276,7 @@ statues= True
 SOCKS_VERSION = 5
 packet =b''
 spaming =True
-full=False
+
 import os
 import sys
 
@@ -633,30 +633,25 @@ class Proxy:
                         global opb
                         global listt
                         global C
+                        global lste
+                        global revoe
                         global istarted
                         global gameplayed
                         global packet
                         global socktion
                         global ca
-                        global lste
-                        global revoe
                         global increase ,back
                         dataS = remote.recv(999999)
-                        
 
-                        
-                        
-                        if '1809' in dataS.hex()[26:30] or "1802" in dataS.hex()[26:30] or "1808" in dataS.hex()[26:30]:
-                          #  ca=False
-                            print(dataC.hex()[0:4])
-                            print('  the team ')
-                            #hackg.send(hackw
-                        
-                        if '0500' in dataS.hex()[0:4] and len(dataS.hex()) > int(1400.1231234234223) and len(dataS.hex()) < int(2000.3242354352345235):
-                            lste = dataS
-                            revoe = client
-                        if '1200' in dataS.hex()[0:4] and '72657475726e' in dataS.hex()[0:] :
-                                revoe.send(lste)
+                    if '1809' in dataS.hex()[26:30]:
+
+                      print('  the team play game stop ')
+                                #hackg.send(hackw
+                    if '0500' in dataS.hex()[0:4] and len(dataS.hex()) > int(1400.1231234234223) and len(dataS.hex()) < int(2000.3242354352345235):
+                        lste = dataS
+                        revoe = client
+                    if '1200' in dataS.hex()[0:4] and '72657475726e' in dataS.hex()[0:] :
+                        revoe.send(lste)
                         if '0300' in dataS.hex()[0:4] :
                             #print('yes')
                             C = client
