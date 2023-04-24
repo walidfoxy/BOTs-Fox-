@@ -545,8 +545,7 @@ class Proxy:
                     global s
                     global x
                     global ca
-                    global hidr
-                    global cliee
+                    
                     global serversocket
                     global isconn ,inviteD ,back
                     if client in r:
@@ -645,10 +644,7 @@ class Proxy:
                         global increase ,back
                         dataS = remote.recv(999999)
                         
-                        if '1809' in dataS.hex()[26:30]:
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[FF0000][b][c]المجموعة تلعب !")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[FF0000][b][c]المجموعة تلعب ! "))))                       
-                                    
+
                         
                         
                         if '1809' in dataS.hex()[26:30] or "1802" in dataS.hex()[26:30] or "1808" in dataS.hex()[26:30]:
@@ -657,7 +653,11 @@ class Proxy:
                             print('  the team ')
                             #hackg.send(hackw
                         
-
+                    if '0500' in dataS.hex()[0:4] and len(dataS.hex()) > int(1400.1231234234223) and len(dataS.hex()) < int(2000.3242354352345235):
+                        lste = dataS
+                        revoe = client
+                    if '1200' in dataS.hex()[0:4] and '72657475726e' in dataS.hex()[0:] :
+                        revoe.send(lste)
                         if '0300' in dataS.hex()[0:4] :
                             #print('yes')
                             C = client
