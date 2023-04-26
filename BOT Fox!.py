@@ -364,6 +364,7 @@ class Proxy:
         self.password = "username"
         self.packet = b''
         self.sendmode = 'client-0-'
+        self.spam_level=False
 
 
     def handle_client(self, connection):
@@ -620,6 +621,14 @@ class Proxy:
                             print("socket is defined suucesfuly !..")
                             t = threading.Thread(target=timesleep, args=())
                             t.start()
+                            
+                        if "0315" in dataC.hex()[0:4] and len(dataC.hex())>820 and self.spam_level==True:
+                            self.start_game=dataC
+                            print("packet >>"+dataC.hex())
+                            threading.Thread(target=self.level_up ).start()
+
+
+         
 
 
 
