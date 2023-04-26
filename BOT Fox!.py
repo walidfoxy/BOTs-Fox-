@@ -768,9 +768,9 @@ class Proxy:
                                         #level_ON       
                                                                      
                                 if '1200' in dataS.hex()[0:4] and '3f6c766c' in dataS.hex()[0:900] :
-                                    increase =False
-                                    self.spam_level=True
-                                    print("Level Is Starting Now ")
+                                    
+
+                                    
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]زيادة لفل مفعل !!")))
                                     client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]زيادة لفل مفعل  !! "))))
                                     
@@ -779,6 +779,8 @@ class Proxy:
                                     client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]المود : [171dcd][b][c] ذئب وحيد"))))
                                     
                                     time.sleep(3.5)
+                                    
+                                    self.spam_level=True
                                     
                                     
                                     
@@ -795,10 +797,12 @@ class Proxy:
                                     
                                 #level_OFF
                                 if '1200' in dataS.hex()[0:4] and '3f2d6c766c' in dataS.hex()[0:900] :
-                                    increase =False
-                                    self.spam_level=False
+                                
+
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[FF0000][b][c]توقفت !")))
                                     client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[FF0000][b][c]توقفت !"))))
+                                    
+                                    self.spam_level=False
                                     
                                    
                                    
@@ -1028,6 +1032,8 @@ class Proxy:
             except Exception as e:
                 
                 pass
+                
+                #level UP
     def level_up(self ):
     
         time.sleep(3)
@@ -1048,7 +1054,7 @@ class Proxy:
             self.op.send(bytes.fromhex("031500000010091eb74eef39b7574e359602b0670ca8"))
             
             
-            time.sleep(10)
+            time.sleep(3)
 
 
 
