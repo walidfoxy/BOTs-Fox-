@@ -276,7 +276,7 @@ statues= True
 SOCKS_VERSION = 5
 packet =b''
 spaming =True
-
+full=False
 import os
 import sys
 
@@ -545,6 +545,8 @@ class Proxy:
                     global s
                     global x
                     global ca
+                    global hidr
+                    global cliee
                     global serversocket
                     global isconn ,inviteD ,back
                     if client in r:
@@ -633,8 +635,6 @@ class Proxy:
                         global opb
                         global listt
                         global C
-                        global lste
-                        global revoe
                         global istarted
                         global gameplayed
                         global packet
@@ -642,16 +642,15 @@ class Proxy:
                         global ca
                         global increase ,back
                         dataS = remote.recv(999999)
+                        
+                        
+                        if '1809' in dataS.hex()[26:30] or "1802" in dataS.hex()[26:30] or "1808" in dataS.hex()[26:30]:
+                          #  ca=False
+                            print(dataC.hex()[0:4])
+                            print('  the team ')
+                            #hackg.send(hackw
+                        
 
-                    if '1809' in dataS.hex()[26:30]:
-
-                      print('  the team play game stop ')
-                                #hackg.send(hackw
-                    if '0500' in dataS.hex()[0:4] and len(dataS.hex()) > int(1400.1231234234223) and len(dataS.hex()) < int(2000.3242354352345235):
-                        lste = dataS
-                        revoe = client
-                    if '1200' in dataS.hex()[0:4] and '72657475726e' in dataS.hex()[0:] :
-                        revoe.send(lste)
                         if '0300' in dataS.hex()[0:4] :
                             #print('yes')
                             C = client
@@ -760,7 +759,8 @@ class Proxy:
                                         #level_ON       
                                                                      
                                 if '1200' in dataS.hex()[0:4] and '3f6c766c' in dataS.hex()[0:900] :
-                                    increase =True
+                                    increase =False
+                                    self.spam_level=True
                                     print("Level Is Starting Now ")
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]زيادة لفل مفعل !!")))
                                     client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]زيادة لفل مفعل  !! "))))
@@ -787,6 +787,7 @@ class Proxy:
                                 #level_OFF
                                 if '1200' in dataS.hex()[0:4] and '3f2d6c766c' in dataS.hex()[0:900] :
                                     increase =False
+                                    self.spam_level=False
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[FF0000][b][c]توقفت !")))
                                     client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[FF0000][b][c]توقفت !"))))
                                     
@@ -965,7 +966,7 @@ class Proxy:
                                     cliee = client
                                     print("Catch Packet Sucess !")
                                     print("paket--->",dataS.hex())
-                                if '1200' in dataS.hex()[0:4] and '2f39' in dataS.hex()[0:900]:
+                                if '1200' in dataS.hex()[0:4] and '2F77616C6964' in dataS.hex() :
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c] تم سترجاعه للمجموعة !")))
                                     client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]تم سترجاعه للمجموعة ! "))))
                                     
@@ -1018,6 +1019,29 @@ class Proxy:
             except Exception as e:
                 
                 pass
+    def level_up(self ):
+    
+        time.sleep(3)
+        print("start")
+        self.op.send(bytes.fromhex("031500000010091eb74eef39b7574e359602b0670ca8"))
+        self.op.send(bytes.fromhex("031500000010091eb74eef39b7574e359602b0670ca8"))
+        self.op.send(bytes.fromhex("031500000010091eb74eef39b7574e359602b0670ca8"))
+           
+        while self.spam_level==True :
+            
+            
+            
+            self.op.send(self.start_game)
+            
+
+            self.op.send(bytes.fromhex("031500000010091eb74eef39b7574e359602b0670ca8"))
+            self.op.send(bytes.fromhex("031500000010091eb74eef39b7574e359602b0670ca8"))
+            self.op.send(bytes.fromhex("031500000010091eb74eef39b7574e359602b0670ca8"))
+            
+            
+            time.sleep(10)
+
+
 
 def start_bot():
     try :
