@@ -353,8 +353,9 @@ import socket
 import threading
 import select
 SOCKS_VERSION= 5
-
-
+server_chang=False
+singafora= False
+mena=False
 class Proxy:
 
 
@@ -406,9 +407,40 @@ class Proxy:
 
         port = int.from_bytes(connection.recv(2), 'big', signed=False)
         port2 = port
+        
+
         try:
+            if cmd == 1:  # CONNECT
+                remote = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 
+
+                if server_chang==True:
+
+                    #serves ip
+                    if port==39699 : #39699
+                        print(f"the oficail address {address}")
+                        address="23.90.159.146"
+
+                    if port==39801:
+                        print(f"the oficail address {address}")
+                        address="23.90.159.202"
+
+                    
+                
+                if singafora==True:
+    
+                    
+                    if port==39699 : #39699
+                        print(f"the oficail address {address}")
+                        address="23.90.158.18"
+
+                    if port==39801:
+                        print(f"the oficail address {address}")
+                        address="23.90.158.118"
+
+                    
+                    
 
 
 
@@ -551,11 +583,20 @@ class Proxy:
                     global cliee
                     global serversocket
                     global isconn ,inviteD ,back
+                    global singafora , server_chang ,port_conect_39699 , port_conect_39801
                     if client in r:
 
 
 
                         dataC = client.recv(999999)
+                        
+                        
+          
+                    if "39801" in str(remote):
+                        port_conect_39801=remote
+                    if "3969" in str(remote):
+                        port_conect_39699=remote
+
 
 
                         if port ==39801 or port ==39699:
@@ -658,6 +699,12 @@ class Proxy:
                         global ca
                         global increase ,back
                         dataS = remote.recv(999999)
+                        
+                        if "39801" in str(remote):
+                            port_conect_39801=remote
+                        if "3969" in str(remote):
+                            port_conect_39699=remote
+
                         
                         
                         if '1809' in dataS.hex()[26:30] or "1802" in dataS.hex()[26:30] or "1808" in dataS.hex()[26:30]:
@@ -787,7 +834,7 @@ class Proxy:
                                     
                                     time.sleep(3.5)
                                     
-                                    self.spam_level=True
+                                    increase =True
                                     
                                     
                                     
@@ -796,6 +843,8 @@ class Proxy:
                                     
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[1200000002-07]")))
                                     client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[1200000002-07]"))))
+                                    
+                                    
                                     
                                     
                                     
@@ -960,6 +1009,18 @@ class Proxy:
 
                                     statues= False
                                     
+                
+
+                                if '1200' in data.hex()[0:4] :
+                                    if b'/ER' in data:
+                                        server_chang=True
+                                        port_conect_39699.close()
+                                        port_conect_39801.close()
+                                    if b'/ME' in data:
+                                        singafora=True
+                                        port_conect_39699.close()
+                                        port_conect_39801.close()
+                    
 
                                     
                                     
