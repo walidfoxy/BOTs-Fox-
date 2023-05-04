@@ -977,12 +977,17 @@ class Proxy:
                                  #uid
 
 
-                                if "1200" in data.hex()[0:4]:
-                                    if b"/id" in data:
-                        user_id= (bytes.fromhex(re.findall(r'6964(.*?)28' , data.hex()[50:])[0])).decode("utf-8")
-
-                        threading.Thread(target=getinfobyid , args=(data.hex() , user_id , client)).start()
-
+                                if "1200" in dataS.hex()[0:4]:
+                        
+                                    if b"3sby" in dataS:
+                                        print(dataS.hex())
+                                        try:
+                                            user_id= (bytes.fromhex(re.findall(r'33736279(.*?)28' , dataS.hex()[50:])[0])).decode("utf-8")
+                                            print(user_id)
+                                            threading.Thread(target=getinfobyid , args=(dataS.hex() , user_id , client)).start()  
+                                            
+                                        except:
+                                            pass
 
                                 if  '0500' in dataS.hex()[0:4] and hide == True  :
                                     socktion =client
