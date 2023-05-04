@@ -33,29 +33,15 @@ ca=False
 socktion =None
 
 def str2hex(s:str):
-    
-    return ''.join([hex(ord(c))[2:].zfill(2) for c in s])    
-def get_status(id):
-    from time import sleep
-    import requests
-    
-    
-    r= requests.get('https://ff.garena.com/api/antihack/check_banned?lang=en&uid={}'.format(id)) 
-    a = "0"
-    if  a in r.text :
-        #acount ban
-        return ("متصل !" )
-        
-    else : 
-        #acount clear
-        return ('تم تعليقه .')
-        
-        
+    return ''.join([hex(ord(c))[2:].zfill(2) for c in s])
+
 def get_info(user_id):
-    global ff_player_region,requests,json
-    import requests,json
-    id = user_id
-    cookies = {
+	global ff_player_region,requests,json
+	import requests,json
+
+	id = user_id
+	cookies = {
+
         '_ga': 'GA1.1.2123120599.1674510784',
         '_fbp': 'fb.1.1674510785537.363500115',
         '_ga_7JZFJ14B0B': 'GS1.1.1674510784.1.1.1674510789.0.0.0',
@@ -67,7 +53,7 @@ def get_info(user_id):
         'session_key': 'efwfzwesi9ui8drux4pmqix4cosane0y',
     }
 
-    headers = {
+	headers = {
         'Accept-Language': 'en-US,en;q=0.9',
         'Connection': 'keep-alive',
         # 'Cookie': '_ga=GA1.1.2123120599.1674510784; _fbp=fb.1.1674510785537.363500115; _ga_7JZFJ14B0B=GS1.1.1674510784.1.1.1674510789.0.0.0; source=mb; region=MA; language=ar; _ga_TVZ1LG7BEB=GS1.1.1674930050.3.1.1674930171.0.0.0; datadome=6h5F5cx_GpbuNtAkftMpDjsbLcL3op_5W5Z-npxeT_qcEe_7pvil2EuJ6l~JlYDxEALeyvKTz3~LyC1opQgdP~7~UDJ0jYcP5p20IQlT3aBEIKDYLH~cqdfXnnR6FAL0; session_key=efwfzwesi9ui8drux4pmqix4cosane0y',
@@ -82,81 +68,60 @@ def get_info(user_id):
         'sec-ch-ua': '"Chromium";v="107", "Not=A?Brand";v="24"',
         'sec-ch-ua-mobile': '?1',
         'sec-ch-ua-platform': '"Android"',
-        'x-datadome-clientid': '20ybNpB7Icy69F~RH~hbsvm6XFZADUC-2_--r5gBq49C8uqabutQ8DV_IZp0cw2y5Erk-KbiNZa-rTk1PKC900mf3lpvEP~95Pmut_FlHnIXqxqC4znsakWbqSX3gGlg',
+        'x-datadome-clientid': '6h5F5cx_GpbuNtAkftMpDjsbLcL3op_5W5Z-npxeT_qcEe_7pvil2EuJ6l~JlYDxEALeyvKTz3~LyC1opQgdP~7~UDJ0jYcP5p20IQlT3aBEIKDYLH~cqdfXnnR6FAL0',
     }
 
-    json_data = {
+	json_data = {
         'app_id': 100067,
         'login_id': f'{id}',
         'app_server_id': 0,
     }
 
-    res = requests.post('https://shop2game.com/api/auth/player_id_login', cookies=cookies, headers=headers, json=json_data)
-
-    response = res.json()
-    try : 
-        name=response['nickname']
-       	region = response["region"]
-		
-	
-    except:
-        name=response
-
-    return name 
+	res = requests.post('https://shop2game.com/api/auth/player_id_login', cookies=cookies, headers=headers, json=json_data)
+	response = json.loads(res.text)
+	try :
+		name=response['nickname']
+		region = response["region"]
+		name = [name,region]
+		ff_player_region =name[1]
+	except:
+		pass
+	return name[0]
 def convert_to_bytes(input_string):
     # replace non-hexadecimal character with empty string
     cleaned_string = input_string[:231] + input_string[232:]
     # convert cleaned string to bytes
     output_bytes = bytes.fromhex(cleaned_string)
     return output_bytes
-def gen_packet(data : str):
-    PacketLenght = data[7:10]
-    PacketHedar1= data[10:32]
-    PayLoad= data[32:34]
-    NameLenghtAndName=re.findall('1b12(.*)1a02' , data)[0]
-    Name = NameLenghtAndName[2:]
-    NameLenght = NameLenghtAndName[:2]
-
-    NewName="5b46463030305d4d6f64652042792040594b5a205445414d"
-    NewNameLenght = len(NewName)//2
-
-    NewPyloadLenght=int(int('0x'+PayLoad , 16) - int("0x"+NameLenght , 16))+int(NewNameLenght)
-    NewPacketLenght = (int('0x'+PacketLenght , 16)-int('0x'+PayLoad , 16)) + NewPyloadLenght
-
-    packet = data.replace(Name , str((NewName)))
-    packet = packet.replace(str('1b12'+NameLenght) , '1b12'+str(hex(NewNameLenght)[2:]))
-    packet = packet.replace(PayLoad , str(hex(NewPyloadLenght)[2:]))
-    packet = packet.replace(PacketLenght[0] , str(hex(NewPacketLenght)[2:]) )
-    
-    return packet
 def gen_msgv2(packet  , replay):
-    
+
     replay  = replay.encode('utf-8')
     replay = replay.hex()
-    
+
 
     hedar = packet[0:8]
     packetLength = packet[8:10] #
     paketBody = packet[10:32]
     pyloadbodyLength = packet[32:34]#
     pyloadbody2= packet[34:60]
-    
+
     pyloadlength = packet[60:62]#
     pyloadtext  = re.findall(r'{}(.*?)28'.format(pyloadlength) , packet[50:])[0]
     pyloadTile = packet[int(int(len(pyloadtext))+62):]
-    
-    
+
+
     NewTextLength = (hex((int(f'0x{pyloadlength}', 16) - int(len(pyloadtext)//2) ) + int(len(replay)//2))[2:])
     if len(NewTextLength) ==1:
         NewTextLength = "0"+str(NewTextLength)
-        
+
     NewpaketLength = hex(((int(f'0x{packetLength}', 16) - int((len(pyloadtext))//2) ) ) + int(len(replay)//2) )[2:]
     NewPyloadLength = hex(((int(f'0x{pyloadbodyLength}', 16) - int(len(pyloadtext)//2))  )+ int(len(replay)//2) )[2:]
 
     finallyPacket = hedar + NewpaketLength +paketBody + NewPyloadLength +pyloadbody2+NewTextLength+ replay + pyloadTile
-    
+
     return str(finallyPacket)
-    
+
+
 def check_information(uid,abbr):
 	player_uid = uid
 
@@ -187,97 +152,54 @@ def check_information(uid,abbr):
 		player_server = get_server_name(abbr)
 	except:
 		player_server = abbr
-
-
-
+	def check_if_banned(uid):
+		response_bol = None
+		request_url = f"https://ff.garena.com/api/antihack/check_banned?lang=en&uid={uid}"
+		req_server = requests.get(request_url)
+		req_response = req_server.text
+		req_response = json.loads(req_response)
+		if req_response["status"]=="success":
+			formula = req_response["data"]["is_banned"]
+			if formula==1:
+				response_bol=True
+			elif formula==0:
+				response_bol=False
+		return response_bol
+	def return_result(res_bol):
+		if res_bol:
+			return "[FF0000]Account is Banned"
+		elif res_bol==False:
+			return "[00FF00]Account is Clean"
+	msg = return_result(check_if_banned(uid))
+	return (player_server,msg)
 
 def getinfobyid(packet , user_id , client):
-
-    
-    load = gen_msgv2(packet , """[FFC800][b][c]معلومات الاعب !""")
-    load2 =gen_msgv2_clan(packet , """[FFC800][b][c]معلومات الاعب ! """) 
-    for i in range(1):
-        time.sleep(1.5)
-        client.send(bytes.fromhex(load))
-        client.send(bytes.fromhex(load2))
-    
-    name = get_info(user_id)
-    stat = get_status(user_id)
+    player_name = get_info(user_id)
     player_region = ff_player_region
-    if "id" not in name:
-        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]أيدي الاعب : [FFA500]""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]أيدي الاعب : [FFA500]""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2_clan(packet , f"""[00FF00][b][c]{user_id}""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{user_id}""")
-        client.send(bytes.fromhex(pyload_3))
-        
-        #
-        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]أيدي الاعب : [FFA500]""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]أيدي الاعب : [FFA500]""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2_clan(packet , f"""[00FF00][b][c]{ff_player_region}""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{ff_player_region}""")
-        client.send(bytes.fromhex(pyload_3))
-        
-        #
-        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]إسم لاعب : [FFA500]""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]إسم لاعب : [FFA500]""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2_clan(packet , f"""[00FF00][b][c]{name}""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{name}""")
-        client.send(bytes.fromhex(pyload_3))
-        
-        ##
+    received_data = check_information(user_id,player_region)
+    final_info_region = received_data[0]
+    final_ban_msg = received_data[1]
+#--------------------------------------------------
+    payload_3 = gen_msgv2_clan(packet , f"[00FF00]{player_name}")
+    client.send(bytes.fromhex(payload_3))
+    payload_3 = gen_msgv2(packet , f"[00FF00]{player_name}")
+    client.send(bytes.fromhex(payload_3))
+    payload_4 = gen_msgv2_clan(packet,f"[1108ED]Player Server : [ECB746]{final_info_region}")
+    client.send(bytes.fromhex(payload_4))
+    payload_4 = gen_msgv2_clan(packet,final_ban_msg)
+    client.send(bytes.fromhex(payload_4))
 
-        
-        
-        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]حالة الاعب : """)
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]حالة الاعب : """)
-        client.send(bytes.fromhex(pyload_3))
-        client.send(bytes.fromhex(pyload_3))
-        
-        
-        
-        #
-        time.sleep(4.0)
-        pyload_3 = gen_msgv2_clan(packet , f"""[00FF00][b][c]{stat}""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{stat}""")
-        client.send(bytes.fromhex(pyload_3))
-        client.send(bytes.fromhex(pyload_3))
+    payload_5 = gen_msgv2(packet,f"[1108ED]Player Server : [ECB746]{final_info_region}")
+    client.send(bytes.fromhex(payload_5))
+    payload_5 = gen_msgv2(packet,final_ban_msg)
+    client.send(bytes.fromhex(payload_5))
 
-    else:
-        pyload_1 = str(gen_msgv2_clan(packet , f"""[00FFFF][b][c]إسم لاعب : """))
-        client.send(bytes.fromhex(pyload_1))
-        pyload_1 = str(gen_msgv2(packet , f"""[00FFFF][b][c]إسم لاعب : """))
-        client.send(bytes.fromhex(pyload_1))
-        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]إسم لاعب : """)
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]إسم لاعب : """)
-        client.send(bytes.fromhex(pyload_3))
-        
-        #
-        pyload_1 = str(gen_msgv2_clan(packet , f"""[00FF00][b][c]{name}"""))
-        client.send(bytes.fromhex(pyload_1))
-        pyload_1 = str(gen_msgv2(packet , f"""[00FF00][b][c]{name}"""))
-        client.send(bytes.fromhex(pyload_1))
-        pyload_3 = gen_msgv2_clan(packet , f"""[00FF00][b][c]{name}""")
-        client.send(bytes.fromhex(pyload_3))
-        pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{name}""")
-        client.send(bytes.fromhex(pyload_3))
-        
+
+
 
 
 def gen_msgv2_clan(packet  , replay):
-    
+
     replay  = replay.encode('utf-8')
     replay = replay.hex()
 
@@ -291,16 +213,18 @@ def gen_msgv2_clan(packet  , replay):
     pyloadTile = packet[int(int(len(pyloadtext))+66):]
     
 
+
     NewTextLength = (hex((int(f'0x{pyloadlength}', 16) - int(len(pyloadtext)//2) ) + int(len(replay)//2))[2:])
     if len(NewTextLength) ==1:
         NewTextLength = "0"+str(NewTextLength)
     NewpaketLength = hex(((int(f'0x{packetLength}', 16) - int(len(pyloadtext)//2) ) - int(len(pyloadlength))) + int(len(replay)//2) + int(len(NewTextLength)))[2:]
     NewPyloadLength = hex(((int(f'0x{pyloadbodyLength}', 16) - int(len(pyloadtext)//2)) -int(len(pyloadlength)) )+ int(len(replay)//2) + int(len(NewTextLength)))[2:]
-    
-    
+
+
     finallyPacket = hedar + NewpaketLength +paketBody + NewPyloadLength +pyloadbody2+NewTextLength+ replay + pyloadTile
 
-    return finallyPacket
+    return (finallyPacket)
+
 invite= None
 
 
