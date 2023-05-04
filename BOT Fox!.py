@@ -882,9 +882,9 @@ class Proxy:
                                     
                                     
 #           /5
-                                if '1200' in dataS.hex()[0:4] and '2f322' in dataS.hex()[0:900]:
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c]تحويل وضع سكواد 5 ")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]تحويل وضع سكواد 5 "))))
+                                if '1200' in dataS.hex()[0:4] and '2F3232' in dataS.hex()[0:900]:
+                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c]تحويل وضع سكواد 22 ")))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]تحويل وضع سكواد 22 "))))
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[1200000002-08]")))
                                     client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[1200000002-08]"))))
                                     
