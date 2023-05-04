@@ -597,6 +597,7 @@ class Proxy:
                     global inviteR
                     global inviteC
                     global inviteM
+                    global spams
                     global isconn ,inviteD ,back
                     if client in r:
 
@@ -653,24 +654,24 @@ class Proxy:
                         if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >=900 and inviteR==True and hide ==False :
                             var = 0
                             m = threading.Thread(target=destroy1, args=(remote,dataC))
- 
-                            global spams
+                            m.start()
+                            
                             spams =True
                             
                                     #invite_C
                         if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >=900 and inviteC==True and hide ==False :
                             var = 0
                             m = threading.Thread(target=destroy2, args=(remote,dataC))
- 
-                            global spams
+                            m.start()
+                            
                             spams =True
                             
                                     #invite_M
                         if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >=900 and inviteM==True and hide ==False :
                             var = 0
                             m = threading.Thread(target=destroy3, args=(remote,dataC))
- 
-                            global spams
+                            m.start()
+                            
                             spams =True
 
                         if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >= 141:
