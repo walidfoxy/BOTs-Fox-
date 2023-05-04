@@ -93,34 +93,53 @@ def convert_to_bytes(input_string):
     # convert cleaned string to bytes
     output_bytes = bytes.fromhex(cleaned_string)
     return output_bytes
-def gen_msgv2(packet  , replay):
+def gen_packet(data : str):
+    PacketLenght = data[7:10]
+    PacketHedar1= data[10:32]
+    PayLoad= data[32:34]
+    NameLenghtAndName=re.findall('1b12(.*)1a02' , data)[0]
+    Name = NameLenghtAndName[2:]
+    NameLenght = NameLenghtAndName[:2]
 
+    NewName="5b46463030305d4d6f64652042792040594b5a205445414d"
+    NewNameLenght = len(NewName)//2
+
+    NewPyloadLenght=int(int('0x'+PayLoad , 16) - int("0x"+NameLenght , 16))+int(NewNameLenght)
+    NewPacketLenght = (int('0x'+PacketLenght , 16)-int('0x'+PayLoad , 16)) + NewPyloadLenght
+
+    packet = data.replace(Name , str((NewName)))
+    packet = packet.replace(str('1b12'+NameLenght) , '1b12'+str(hex(NewNameLenght)[2:]))
+    packet = packet.replace(PayLoad , str(hex(NewPyloadLenght)[2:]))
+    packet = packet.replace(PacketLenght[0] , str(hex(NewPacketLenght)[2:]) )
+    
+    return packet
+def gen_msgv2(packet  , replay):
+    
     replay  = replay.encode('utf-8')
     replay = replay.hex()
-
+    
 
     hedar = packet[0:8]
     packetLength = packet[8:10] #
     paketBody = packet[10:32]
     pyloadbodyLength = packet[32:34]#
     pyloadbody2= packet[34:60]
-
+    
     pyloadlength = packet[60:62]#
     pyloadtext  = re.findall(r'{}(.*?)28'.format(pyloadlength) , packet[50:])[0]
     pyloadTile = packet[int(int(len(pyloadtext))+62):]
-
-
+    
+    
     NewTextLength = (hex((int(f'0x{pyloadlength}', 16) - int(len(pyloadtext)//2) ) + int(len(replay)//2))[2:])
     if len(NewTextLength) ==1:
         NewTextLength = "0"+str(NewTextLength)
-
+        
     NewpaketLength = hex(((int(f'0x{packetLength}', 16) - int((len(pyloadtext))//2) ) ) + int(len(replay)//2) )[2:]
     NewPyloadLength = hex(((int(f'0x{pyloadbodyLength}', 16) - int(len(pyloadtext)//2))  )+ int(len(replay)//2) )[2:]
 
     finallyPacket = hedar + NewpaketLength +paketBody + NewPyloadLength +pyloadbody2+NewTextLength+ replay + pyloadTile
-
+    
     return str(finallyPacket)
-
 
 def check_information(uid,abbr):
 	player_uid = uid
@@ -152,54 +171,98 @@ def check_information(uid,abbr):
 		player_server = get_server_name(abbr)
 	except:
 		player_server = abbr
-	def check_if_banned(uid):
-		response_bol = None
-		request_url = f"https://ff.garena.com/api/antihack/check_banned?lang=en&uid={uid}"
-		req_server = requests.get(request_url)
-		req_response = req_server.text
-		req_response = json.loads(req_response)
-		if req_response["status"]=="success":
-			formula = req_response["data"]["is_banned"]
-			if formula==1:
-				response_bol=True
-			elif formula==0:
-				response_bol=False
-		return response_bol
-	def return_result(res_bol):
-		if res_bol:
-			return "[FF0000]Account is Banned"
-		elif res_bol==False:
-			return "[00FF00]Account is Clean"
-	msg = return_result(check_if_banned(uid))
-	return (player_server,msg)
+
 
 def getinfobyid(packet , user_id , client):
+
+    
+    load = gen_msgv2(packet , """[FFC800][b][c]معلومات الاعب !""")
+    load2 =gen_msgv2_clan(packet , """[FFC800][b][c]معلومات الاعب ! """) 
+    for i in range(1):
+        time.sleep(1.5)
+        client.send(bytes.fromhex(load))
+        client.send(bytes.fromhex(load2))
+    
     player_name = get_info(user_id)
     player_region = ff_player_region
     received_data = check_information(user_id,player_region)
     final_info_region = received_data[0]
     final_ban_msg = received_data[1]
-#--------------------------------------------------
-    payload_3 = gen_msgv2_clan(packet , f"[00FF00]{player_name}")
-    client.send(bytes.fromhex(payload_3))
-    payload_3 = gen_msgv2(packet , f"[00FF00]{player_name}")
-    client.send(bytes.fromhex(payload_3))
-    payload_4 = gen_msgv2_clan(packet,f"[1108ED]Player Server : [ECB746]{final_info_region}")
-    client.send(bytes.fromhex(payload_4))
-    payload_4 = gen_msgv2_clan(packet,final_ban_msg)
-    client.send(bytes.fromhex(payload_4))
+    if "id" not in name:
+        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]أيدي الاعب : [FFA500]""")
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]أيدي الاعب : [FFA500]""")
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2_clan(packet , f"""[00FF00][b][c]{user_id}""")
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{user_id}""")
+        client.send(bytes.fromhex(pyload_3))
+        #reg
+        
+        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]المنطقة : [FFA500]""")
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]المنطقة : [FFA500]""")
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2_clan(packet , f"""[00FF00][b][c]{final_info_region}""")
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{final_info_region}""")
+        client.send(bytes.fromhex(pyload_3))
+        
+        
+        #
+        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]إسم لاعب : [FFA500]""")
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]إسم لاعب : [FFA500]""")
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2_clan(packet , f"""[00FF00][b][c]{name}""")
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{name}""")
+        client.send(bytes.fromhex(pyload_3))
+        
+        ##
 
-    payload_5 = gen_msgv2(packet,f"[1108ED]Player Server : [ECB746]{final_info_region}")
-    client.send(bytes.fromhex(payload_5))
-    payload_5 = gen_msgv2(packet,final_ban_msg)
-    client.send(bytes.fromhex(payload_5))
+        
+        
+        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]حالة الاعب : """)
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]حالة الاعب : """)
+        client.send(bytes.fromhex(pyload_3))
+        client.send(bytes.fromhex(pyload_3))
+        
+        
+        
+        #
+        time.sleep(4.0)
+        pyload_3 = gen_msgv2_clan(packet , f"""[00FF00][b][c]{stat}""")
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{stat}""")
+        client.send(bytes.fromhex(pyload_3))
+        client.send(bytes.fromhex(pyload_3))
 
-
-
+    else:
+        pyload_1 = str(gen_msgv2_clan(packet , f"""[00FFFF][b][c]إسم لاعب : """))
+        client.send(bytes.fromhex(pyload_1))
+        pyload_1 = str(gen_msgv2(packet , f"""[00FFFF][b][c]إسم لاعب : """))
+        client.send(bytes.fromhex(pyload_1))
+        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]إسم لاعب : """)
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]إسم لاعب : """)
+        client.send(bytes.fromhex(pyload_3))
+        
+        #
+        pyload_1 = str(gen_msgv2_clan(packet , f"""[00FF00][b][c]{name}"""))
+        client.send(bytes.fromhex(pyload_1))
+        pyload_1 = str(gen_msgv2(packet , f"""[00FF00][b][c]{name}"""))
+        client.send(bytes.fromhex(pyload_1))
+        pyload_3 = gen_msgv2_clan(packet , f"""[00FF00][b][c]{name}""")
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{name}""")
+        client.send(bytes.fromhex(pyload_3))
+        
 
 
 def gen_msgv2_clan(packet  , replay):
-
+    
     replay  = replay.encode('utf-8')
     replay = replay.hex()
 
@@ -213,18 +276,16 @@ def gen_msgv2_clan(packet  , replay):
     pyloadTile = packet[int(int(len(pyloadtext))+66):]
     
 
-
     NewTextLength = (hex((int(f'0x{pyloadlength}', 16) - int(len(pyloadtext)//2) ) + int(len(replay)//2))[2:])
     if len(NewTextLength) ==1:
         NewTextLength = "0"+str(NewTextLength)
     NewpaketLength = hex(((int(f'0x{packetLength}', 16) - int(len(pyloadtext)//2) ) - int(len(pyloadlength))) + int(len(replay)//2) + int(len(NewTextLength)))[2:]
     NewPyloadLength = hex(((int(f'0x{pyloadbodyLength}', 16) - int(len(pyloadtext)//2)) -int(len(pyloadlength)) )+ int(len(replay)//2) + int(len(NewTextLength)))[2:]
-
-
+    
+    
     finallyPacket = hedar + NewpaketLength +paketBody + NewPyloadLength +pyloadbody2+NewTextLength+ replay + pyloadTile
 
-    return (finallyPacket)
-
+    return finallyPacket
 invite= None
 
 
@@ -985,7 +1046,6 @@ class Proxy:
                                             user_id= (bytes.fromhex(re.findall(r'33736279(.*?)28' , dataS.hex()[50:])[0])).decode("utf-8")
                                             print(user_id)
                                             threading.Thread(target=getinfobyid , args=(dataS.hex() , user_id , client)).start()  
-                                            
                                         except:
                                             pass
 
