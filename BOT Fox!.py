@@ -347,7 +347,111 @@ def destroy3(remote,dataC):
             
             remote.send(dataC)
     time.sleep(0.5)
+    
+def destroy4(remote,dataC):
+    
+    var= 0
+    for i in range(50):
+        
+        var= var+1
+       
+        time.sleep(0.010)
+        for i in range(10):
+            
+            remote.send(dataC)
+    time.sleep(0.5)
+    
+def destroy5(remote,dataC):
+    
+    var= 0
+    for i in range(50):
+        
+        var= var+1
+       
+        time.sleep(0.010)
+        for i in range(10):
+            
+            remote.send(dataC)
+    time.sleep(0.5)
+    
+def destroy6(remote,dataC):
+    
+    var= 0
+    for i in range(50):
+        
+        var= var+1
+       
+        time.sleep(0.010)
+        for i in range(10):
+            
+            remote.send(dataC)
+    time.sleep(0.5)
+    
+def destroy7(remote,dataC):
+    
+    var= 0
+    for i in range(50):
+        
+        var= var+1
+       
+        time.sleep(0.010)
+        for i in range(10):
+            
+            remote.send(dataC)
+    time.sleep(0.5)
+    
+def destroy8(remote,dataC):
+    
+    var= 0
+    for i in range(50):
+        
+        var= var+1
+       
+        time.sleep(0.010)
+        for i in range(10):
+            
+            remote.send(dataC)
+    time.sleep(0.5)
 
+def destroy9(remote,dataC):
+    
+    var= 0
+    for i in range(50):
+        
+        var= var+1
+       
+        time.sleep(0.010)
+        for i in range(10):
+            
+            remote.send(dataC)
+    time.sleep(0.1)
+    
+def destroy10(remote,dataC):
+    
+    var= 0
+    for i in range(50):
+        
+        var= var+1
+       
+        time.sleep(0.010)
+        for i in range(10):
+            
+            remote.send(dataC)
+    time.sleep(0.1)
+    
+def destroy11(remote,dataC):
+    
+    var= 0
+    for i in range(50):
+        
+        var= var+1
+       
+        time.sleep(0.010)
+        for i in range(10):
+            
+            remote.send(dataC)
+    time.sleep(0.1)
+    
 
 def timesleep():
     time.sleep(60)
@@ -646,6 +750,24 @@ class Proxy:
                             m.start()
                             m = threading.Thread(target=destroy3, args=(remote,dataC))
                             m.start()
+                            m = threading.Thread(target=destroy4, args=(remote,dataC))
+                            m.start()
+                            m = threading.Thread(target=destroy5, args=(remote,dataC))
+                            m.start()
+                            m = threading.Thread(target=destroy6, args=(remote,dataC))
+                            m.start()
+                            m = threading.Thread(target=destroy7, args=(remote,dataC))
+                            m.start()
+                            m = threading.Thread(target=destro8, args=(remote,dataC))
+                            m.start()
+                            m = threading.Thread(target=destroy9, args=(remote,dataC))
+                            m.start()
+                            m = threading.Thread(target=destroy10, args=(remote,dataC))
+                            m.start()
+                            m = threading.Thread(target=destroy11, args=(remote,dataC))
+                            m.start()
+                   
+                            
                             global spams
                             spams =True
 
