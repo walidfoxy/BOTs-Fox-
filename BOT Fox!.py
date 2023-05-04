@@ -270,6 +270,9 @@ vares = 0
 spy = False
 inviteD=False
 inviteE=False
+inviteR=False
+inviteC=False
+inviteM=False
 op = None
 global statues
 statues= True
@@ -591,6 +594,9 @@ class Proxy:
                     global hidr
                     global cliee
                     global serversocket
+                    global inviteR
+                    global inviteC
+                    global inviteM
                     global isconn ,inviteD ,back
                     if client in r:
 
@@ -639,13 +645,31 @@ class Proxy:
                         if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >=900 and inviteD==True and hide ==False :
                             var = 0
                             m = threading.Thread(target=destroy, args=(remote,dataC))
-                            m.start()
+ 
+                            global spams
+                            spams =True
+                            
+                                    #invite_R
+                        if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >=900 and inviteR==True and hide ==False :
+                            var = 0
                             m = threading.Thread(target=destroy1, args=(remote,dataC))
-                            m.start()
+ 
+                            global spams
+                            spams =True
+                            
+                                    #invite_C
+                        if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >=900 and inviteC==True and hide ==False :
+                            var = 0
                             m = threading.Thread(target=destroy2, args=(remote,dataC))
-                            m.start()
+ 
+                            global spams
+                            spams =True
+                            
+                                    #invite_M
+                        if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >=900 and inviteM==True and hide ==False :
+                            var = 0
                             m = threading.Thread(target=destroy3, args=(remote,dataC))
-                            m.start()
+ 
                             global spams
                             spams =True
 
@@ -765,7 +789,7 @@ class Proxy:
                             else:
                                 #spam_invite
                                 if '1200' in dataS.hex()[0:4] and '2f646573' in dataS.hex()[0:900] : 
-                                    inviteD =True
+                                   
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c]تدمير سكواد <<-- [00ff00][b][c] م")))
                                     client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]تدمير سكواد <<-- [00ff00][b][c] مفعل"))))
 
@@ -779,6 +803,11 @@ class Proxy:
                                     
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[1200000002-12]")))
                                     client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[1200000002-12]"))))
+                                    
+                                    inviteD =True
+                                    inviteR =True
+                                    inviteC =True
+                                    inviteM=True
                                     
                                     
 
