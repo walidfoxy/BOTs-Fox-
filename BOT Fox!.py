@@ -307,6 +307,47 @@ def destroy(remote,dataC):
     time.sleep(0.5)
 
 
+def destroy1(remote,dataC):
+    
+    var= 0
+    for i in range(50):
+        
+        var= var+1
+       
+        time.sleep(0.010)
+        for i in range(10):
+            
+            remote.send(dataC)
+    time.sleep(0.5)
+
+
+def destroy2(remote,dataC):
+    
+    var= 0
+    for i in range(50):
+        
+        var= var+1
+       
+        time.sleep(0.010)
+        for i in range(10):
+            
+            remote.send(dataC)
+    time.sleep(0.5)
+
+
+def destroy3(remote,dataC):
+    
+    var= 0
+    for i in range(50):
+        
+        var= var+1
+       
+        time.sleep(0.010)
+        for i in range(10):
+            
+            remote.send(dataC)
+    time.sleep(0.5)
+
 
 def timesleep():
     time.sleep(60)
@@ -598,6 +639,12 @@ class Proxy:
                         if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >=900 and inviteD==True and hide ==False :
                             var = 0
                             m = threading.Thread(target=destroy, args=(remote,dataC))
+                            m.start()
+                            m = threading.Thread(target=destroy1, args=(remote,dataC))
+                            m.start()
+                            m = threading.Thread(target=destroy2, args=(remote,dataC))
+                            m.start()
+                            m = threading.Thread(target=destroy3, args=(remote,dataC))
                             m.start()
                             global spams
                             spams =True
