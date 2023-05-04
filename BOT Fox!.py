@@ -52,7 +52,8 @@ def get_status(id):
         
         
 def get_info(user_id):
-    import requests
+    global ff_player_region,requests,json
+    import requests,json
     id = user_id
     cookies = {
         '_ga': 'GA1.1.2123120599.1674510784',
@@ -95,6 +96,9 @@ def get_info(user_id):
     response = res.json()
     try : 
         name=response['nickname']
+       	region = response["region"]
+		
+	
     except:
         name=response
 
@@ -152,11 +156,43 @@ def gen_msgv2(packet  , replay):
     finallyPacket = hedar + NewpaketLength +paketBody + NewPyloadLength +pyloadbody2+NewTextLength+ replay + pyloadTile
     
     return str(finallyPacket)
+    
+def check_information(uid,abbr):
+	player_uid = uid
+
+	servers_name_db = {
+	"bd": "Bangladesh",
+	"br": "Brazil",
+	"eu": "Europe",
+	"hk": "Hong Kong",
+	"id": "Indonesia",
+	"in": "India",
+	"me": "Middle East",
+	"mo": "Macau",
+	"my": "Malaysia",
+	"ph": "Philippines",
+	"pk": "Pakistan",
+	"ru": "Russia",
+	"sa": "Latin America",
+	"sg": "Singapore",
+	"th": "Thailand",
+	"tw": "Taiwan",
+	"vn": "Vietnam",
+	"ind" : "India"
+	}
+	def get_server_name(abbr):
+		short_name = abbr.lower()
+		return servers_name_db[short_name]
+	try:
+		player_server = get_server_name(abbr)
+	except:
+		player_server = abbr
 
 
 
 
 def getinfobyid(packet , user_id , client):
+
     
     load = gen_msgv2(packet , """[FFC800][b][c]معلومات الاعب !""")
     load2 =gen_msgv2_clan(packet , """[FFC800][b][c]معلومات الاعب ! """) 
@@ -167,6 +203,7 @@ def getinfobyid(packet , user_id , client):
     
     name = get_info(user_id)
     stat = get_status(user_id)
+    player_region = ff_player_region
     if "id" not in name:
         pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]أيدي الاعب : [FFA500]""")
         client.send(bytes.fromhex(pyload_3))
@@ -175,6 +212,16 @@ def getinfobyid(packet , user_id , client):
         pyload_3 = gen_msgv2_clan(packet , f"""[00FF00][b][c]{user_id}""")
         client.send(bytes.fromhex(pyload_3))
         pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{user_id}""")
+        client.send(bytes.fromhex(pyload_3))
+        
+        #
+        pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]أيدي الاعب : [FFA500]""")
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]أيدي الاعب : [FFA500]""")
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2_clan(packet , f"""[00FF00][b][c]{ff_player_region}""")
+        client.send(bytes.fromhex(pyload_3))
+        pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{ff_player_region}""")
         client.send(bytes.fromhex(pyload_3))
         
         #
@@ -270,9 +317,6 @@ vares = 0
 spy = False
 inviteD=False
 inviteE=False
-inviteR=False
-inviteC=False
-inviteM=False
 op = None
 global statues
 statues= True
@@ -309,47 +353,6 @@ def destroy(remote,dataC):
             remote.send(dataC)
     time.sleep(0.5)
 
-
-def destroy1(remote,dataC):
-    
-    var= 0
-    for i in range(50):
-        
-        var= var+1
-       
-        time.sleep(0.010)
-        for i in range(10):
-            
-            remote.send(dataC)
-    time.sleep(0.5)
-
-
-def destroy2(remote,dataC):
-    
-    var= 0
-    for i in range(50):
-        
-        var= var+1
-       
-        time.sleep(0.010)
-        for i in range(10):
-            
-            remote.send(dataC)
-    time.sleep(0.5)
-
-
-def destroy3(remote,dataC):
-    
-    var= 0
-    for i in range(50):
-        
-        var= var+1
-       
-        time.sleep(0.010)
-        for i in range(10):
-            
-            remote.send(dataC)
-    time.sleep(0.5)
 
 
 def timesleep():
@@ -594,10 +597,6 @@ class Proxy:
                     global hidr
                     global cliee
                     global serversocket
-                    global inviteR
-                    global inviteC
-                    global inviteM
-                    global spams
                     global isconn ,inviteD ,back
                     if client in r:
 
@@ -646,32 +645,8 @@ class Proxy:
                         if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >=900 and inviteD==True and hide ==False :
                             var = 0
                             m = threading.Thread(target=destroy, args=(remote,dataC))
- 
+                            m.start()
                             global spams
-                            spams =True
-                            
-                                    #invite_R
-                        if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >=900 and inviteR==True and hide ==False :
-                            var = 0
-                            m = threading.Thread(target=destroy1, args=(remote,dataC))
-                            m.start()
-                            
-                            spams =True
-                            
-                                    #invite_C
-                        if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >=900 and inviteC==True and hide ==False :
-                            var = 0
-                            m = threading.Thread(target=destroy2, args=(remote,dataC))
-                            m.start()
-                            
-                            spams =True
-                            
-                                    #invite_M
-                        if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >=900 and inviteM==True and hide ==False :
-                            var = 0
-                            m = threading.Thread(target=destroy3, args=(remote,dataC))
-                            m.start()
-                            
                             spams =True
 
                         if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >= 141:
@@ -790,7 +765,7 @@ class Proxy:
                             else:
                                 #spam_invite
                                 if '1200' in dataS.hex()[0:4] and '2f646573' in dataS.hex()[0:900] : 
-                                   
+                                    inviteD =True
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c]تدمير سكواد <<-- [00ff00][b][c] م")))
                                     client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]تدمير سكواد <<-- [00ff00][b][c] مفعل"))))
 
@@ -804,11 +779,6 @@ class Proxy:
                                     
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[1200000002-12]")))
                                     client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[1200000002-12]"))))
-                                    
-                                    inviteD =True
-                                    inviteR =True
-                                    inviteC =True
-                                    inviteM=True
                                     
                                     
 
@@ -960,8 +930,8 @@ class Proxy:
                                     
 #           /                          5
                                 if '1200' in dataS.hex()[0:4] and '2f35' in dataS.hex()[0:900]:
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c]تحويل وضع سكواد 55 ")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]تحويل وضع سكواد 55 "))))
+                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c]تحويل وضع سكواد 5 ")))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]تحويل وضع سكواد 5 "))))
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[1200000002-08]")))
                                     client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[1200000002-08]"))))
                                     
@@ -1159,7 +1129,7 @@ class Proxy:
         while ca==True:
             try:
                 self.op.send(data_join)
-                time.sleep(3.0)
+                time.sleep(1.0)
                 self.op.send(self.data_back)
                 #                           0515000000104903408b9e91774e75b990038dddee49
             except Exception as e:
