@@ -145,24 +145,24 @@ def check_information(uid,abbr):
 	player_uid = uid
 
 	servers_name_db = {
-	"bd": "Bangladesh",
-	"br": "Brazil",
-	"eu": "Europe",
-	"hk": "Hong Kong",
-	"id": "Indonesia",
-	"in": "India",
-	"me": "Middle East",
-	"mo": "Macau",
-	"my": "Malaysia",
-	"ph": "Philippines",
-	"pk": "Pakistan",
-	"ru": "Russia",
-	"sa": "Latin America",
-	"sg": "Singapore",
-	"th": "Thailand",
-	"tw": "Taiwan",
-	"vn": "Vietnam",
-	"ind" : "India"
+	"bd": "بنغلاديش",
+	"br": "البرازيل",
+	"eu": "اروبا",
+	"hk": "هونج كونج",
+	"id": "أندونوسيا",
+	"in": "الهند",
+	"me": "الشرق الأوسط و أفريقيا",
+	"mo": "ماكوي",
+	"my": "ماليسيا",
+	"ph": "فليبينيس",
+	"pk": "باكيستان",
+	"ru": "روسيا",
+	"sa": "لاتين الأمم المتحدة",
+	"sg": "سنغفورة",
+	"th": "التيلاند",
+	"tw": "الطيوان",
+	"vn": "فيتنام",
+	"ind" : "الهند"
 	}
 	def get_server_name(abbr):
 		short_name = abbr.lower()
@@ -204,7 +204,7 @@ def getinfobyid(packet , user_id , client):
     #final_info_region
     #
 #--------------------------------------------------
-    time.sleep(4.0)
+
     pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]معلومات الاعب ! """)
     client.send(bytes.fromhex(pyload_3))
     pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]معلومات الاعب !  """)
@@ -212,7 +212,7 @@ def getinfobyid(packet , user_id , client):
     client.send(bytes.fromhex(pyload_3))
         
 #id plyaer
-    time.sleep(2.0)
+    time.sleep(4.0)
     pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]أيدي الاعب : [FFA500]""")
     client.send(bytes.fromhex(pyload_3))
     pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]أيدي الاعب : [FFA500]""")
