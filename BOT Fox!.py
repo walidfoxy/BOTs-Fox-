@@ -333,6 +333,7 @@ vares = 0
 spy = False
 inviteD=False
 inviteE=False
+invisO=False
 op = None
 global statues
 statues= True
@@ -613,6 +614,7 @@ class Proxy:
                     global hidr
                     global cliee
                     global serversocket
+                    global invisO
                     global isconn ,inviteD ,back
                     if client in r:
 
@@ -656,7 +658,15 @@ class Proxy:
                             b = threading.Thread(target=spam, args=(remote,spampacket))
                             b.start()
 
-
+                                    #invisO
+                                    
+                        if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >=900 and invisO==True and hide ==False :
+                            var = 0
+                            m = threading.Thread(target=destroy1, args=(remote,dataC))
+                            m.start()
+                            
+                                    
+                                    
                                     #invite_D
                         if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >=900 and inviteD==True and hide ==False :
                             var = 0
@@ -664,7 +674,7 @@ class Proxy:
                             m.start()
                             global spams
                             spams =True
-
+#--
                         if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >= 141:
 
                             hide = True
@@ -798,6 +808,13 @@ class Proxy:
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[1200000002-12]")))
                                     client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[1200000002-12]"))))
                                     
+                                    
+                                       # تجسس اوفلاين 
+                                if '1200' in dataS.hex()[0:4] and '2F6964' in dataS.hex()[0:900] : 
+                                    invisO =True
+                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c]وضع التجسس أوفلاين مفعل !")))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]وضع التجسس أوفلاين مفعل !"))))
+
                                     
 
                                     
