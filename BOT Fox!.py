@@ -213,9 +213,9 @@ def getinfobyid(packet , user_id , client):
     pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{user_id}""")
     client.send(bytes.fromhex(pyload_3))
     #splach
-    pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]_______________________""")
+    pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]جاري تحميل . . .""")
     client.send(bytes.fromhex(pyload_3))
-    pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]_______________________""")
+    pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]جاري تحميل . . .""")
     client.send(bytes.fromhex(pyload_3))
         #name
         
@@ -232,9 +232,9 @@ def getinfobyid(packet , user_id , client):
         
         
         #splach1
-    pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]_______________________""")
+    pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]جاري تحميل . . .""")
     client.send(bytes.fromhex(pyload_3))
-    pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]_______________________""")
+    pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]جاري تحميل . . .""")
     client.send(bytes.fromhex(pyload_3))
         
         
@@ -252,9 +252,9 @@ def getinfobyid(packet , user_id , client):
         ##
 #splach2
 
-    pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]_______________________""")
+    pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]جاري تحميل . . .""")
     client.send(bytes.fromhex(pyload_3))
-    pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]_______________________""")
+    pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]جاري تحميل . . .""")
     client.send(bytes.fromhex(pyload_3))
         
         
