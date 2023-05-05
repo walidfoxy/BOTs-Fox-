@@ -1079,7 +1079,7 @@ class Proxy:
                                 if '1200' in dataS.hex()[0:4]:
                                     if b"/bot" in dataS:
                                         
-                                    invite.send(bytes.fromhex("051500000020c11276a71758d617ce3164fa4f9ffaa161c8ce760d5624595cf741e6df06ff7a"))
+
                                     
                                         threading.Thread(target=self.dados , args=(self.data_join,)).start()
                                         client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]done ! !")))
