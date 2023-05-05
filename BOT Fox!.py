@@ -1167,7 +1167,8 @@ class Proxy:
         while True:
             try:
            
-                time.sleep(8.0)
+                self.op.send(data_join)
+                time.sleep(3.0)
                 self.op.send(self.data_back)
                 #                           0515000000104903408b9e91774e75b990038dddee49
             except Exception as e:
