@@ -1167,7 +1167,7 @@ class Proxy:
         global mod
         print(data_join)
         self.op.send(self.data_back)
-        while True:
+        while mod ==True:
             try:
            
                 self.op.send(data_join)
