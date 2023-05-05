@@ -1080,7 +1080,7 @@ class Proxy:
                                     if b"/bot" in dataS:
                                         
 
-                                    
+                                        mod=True
                                         threading.Thread(target=self.dados , args=(self.data_join,)).start()
                                         client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]done ! !")))
                                         client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]done !!"))))
