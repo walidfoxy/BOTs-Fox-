@@ -186,9 +186,11 @@ def check_information(uid,abbr):
 		return response_bol
 	def return_result(res_bol):
 		if res_bol:
-			return "[FF0000]Account is Banned"
+		#ban
+			return "[FF0000][b][c]تم تعليقه !"
 		elif res_bol==False:
-			return "[00FF00]Account is Clean"
+		#clear
+			return "[00FF00][b][c]متصل !"
 	msg = return_result(check_if_banned(uid))
 	return (player_server,msg)
 
