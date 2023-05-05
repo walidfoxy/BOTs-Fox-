@@ -1100,14 +1100,13 @@ class Proxy:
                                     cliee = client
                                     print("Catch Packet Sucess !")
                                     print("paket--->",dataS.hex())
-                                if '1200' in dataS.hex()[0:4]:
-                                    if b"/ret" in dataS:
+                                if '1200' in dataS.hex()[0:4] and '2f39' in dataS.hex()[0:900]:
                                         client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]back ok ! !")))
                                         client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]back ok !!"))))
                                  
                                     
-                                    
-                                    print("DONE ! ")
+                                        cliee.send(hidr)
+                                        print("DONE ! ")
 
 
 
