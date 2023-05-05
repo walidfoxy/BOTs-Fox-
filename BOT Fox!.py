@@ -1105,7 +1105,7 @@ class Proxy:
                                         client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]back ok !!"))))
                                  
                                     
-                                        cliee.send(hidr)
+                                        socktion.send(packet)
                                         print("DONE ! ")
 
 
