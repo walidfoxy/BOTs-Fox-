@@ -30,7 +30,6 @@ increase =False
 
 back=False
 ca=False
-mod=False
 socktion =None
 
 def str2hex(s:str):
@@ -334,7 +333,6 @@ vares = 0
 spy = False
 inviteD=False
 inviteE=False
-invisO=False
 op = None
 global statues
 statues= True
@@ -612,11 +610,9 @@ class Proxy:
                     global s
                     global x
                     global ca
-                    global mod
                     global hidr
                     global cliee
                     global serversocket
-                    global invisO
                     global isconn ,inviteD ,back
                     if client in r:
 
@@ -660,15 +656,7 @@ class Proxy:
                             b = threading.Thread(target=spam, args=(remote,spampacket))
                             b.start()
 
-                                    #invisO
-                                    
-                        if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >=900 and invisO==True and hide ==False :
-                            var = 0
-                            m = threading.Thread(target=destroy1, args=(remote,dataC))
-                            m.start()
-                            
-                                    
-                                    
+
                                     #invite_D
                         if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >=900 and inviteD==True and hide ==False :
                             var = 0
@@ -676,7 +664,7 @@ class Proxy:
                             m.start()
                             global spams
                             spams =True
-#--
+
                         if '0515' in dataC.hex()[0:4] and len(dataC.hex()) >= 141:
 
                             hide = True
@@ -733,7 +721,6 @@ class Proxy:
                         global packet
                         global socktion
                         global ca
-                        global mod
                         global increase ,back
                         dataS = remote.recv(999999)
                         
@@ -811,10 +798,6 @@ class Proxy:
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[1200000002-12]")))
                                     client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[1200000002-12]"))))
                                     
-                                    
-                                       # تجسس اوفلاين 
-
-
                                     
 
                                     
@@ -987,7 +970,7 @@ class Proxy:
                                     
                                     
 
-                                    invite.send(bytes.fromhex("000000180a06081910001800120a3237393032333432313518042000"))
+                                    invite.send(bytes.fromhex("051500000020c11276a71758d617ce3164fa4f9ffaa161c8ce760d5624595cf741e6df06ff7a"))
                                     
                                     
 
@@ -1005,11 +988,9 @@ class Proxy:
                                     
                                     
 
-                                    invite.send(bytes.fromhex("050000001808e7b0beb20a1005200d2a0c08e7b0beb20a10e7b0beb20a"))
+                                    invite.send(bytes.fromhex("05150000002098a0bdfd5abbd47ea20d1652a8fa374c78f2fe11f3bf6f5a15ac2dff2ecfd436"))
 
 
-
-####
 
 
 
@@ -1075,19 +1056,6 @@ class Proxy:
 
                                     statues= False
                                     
-#
-                                if '1200' in dataS.hex()[0:4]:
-                                    if b"/bot" in dataS:
-                                        
-
-                                        mod=True
-                                        threading.Thread(target=self.dados , args=(self.data_join,)).start()
-                                        client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]done ! !")))
-                                        client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]done !!"))))
-                                    statues= False
-          
-          ##
-
 
                                  #test
                                 if '1200' in dataS.hex()[0:4]:
@@ -1131,11 +1099,11 @@ class Proxy:
                                     print("Catch Packet Sucess !")
                                     print("paket--->",dataS.hex())
                                 if '1200' in dataS.hex()[0:4] and '2f39' in dataS.hex()[0:900]:
-                                        client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]done ok ! !")))
-                                        client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]doneok !!"))))
+                                        client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]back ok ! !")))
+                                        client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]back ok !!"))))
                                  
                                     
-                                        invisO =True
+                                        cliee.send(hidr)
                                         print("DONE ! ")
 
 
@@ -1165,21 +1133,7 @@ class Proxy:
                 
                 pass
                 
-                
-    def dados( self , data_join):
-        global mod
-        print(data_join)
-        self.op.send(self.data_back)
-        while mod ==True:
-            try:
-           
-                self.op.send(data_join)
-                time.sleep(3.0)
-                self.op.send(self.data_back)
-                #                           0515000000104903408b9e91774e75b990038dddee49
-            except Exception as e:
-           
-                pass
+    
                 
                
     def walid( self , data_join):
