@@ -810,10 +810,7 @@ class Proxy:
                                     
                                     
                                        # تجسس اوفلاين 
-                                if '1200' in dataS.hex()[0:4] and '2f39' in dataS.hex()[0:900] : 
-                                    invisO =True
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c]وضع التجسس أوفلاين مفعل !")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]وضع التجسس أوفلاين مفعل !"))))
+
 
                                     
 
@@ -1115,12 +1112,12 @@ class Proxy:
                                     cliee = client
                                     print("Catch Packet Sucess !")
                                     print("paket--->",dataS.hex())
-                                if '1200' in dataS.hex()[0:4] and '2f38' in dataS.hex()[0:900]:
-                                        client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]back ok ! !")))
-                                        client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]back ok !!"))))
+                                if '1200' in dataS.hex()[0:4] and '2f39' in dataS.hex()[0:900]:
+                                        client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]done ok ! !")))
+                                        client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]doneok !!"))))
                                  
                                     
-                                        cliee.send(hidr)
+                                        invisO =True
                                         print("DONE ! ")
 
 
