@@ -970,7 +970,7 @@ class Proxy:
                                     
                                     
 
-                                    invite.send(bytes.fromhex("051500000020c11276a71758d617ce3164fa4f9ffaa161c8ce760d5624595cf741e6df06ff7a"))
+                                    invite.send(bytes.fromhex("000000180a06081910001800120a3237393032333432313518042000"))
                                     
                                     
 
@@ -988,10 +988,12 @@ class Proxy:
                                     
                                     
 
-                                    invite.send(bytes.fromhex("05150000002098a0bdfd5abbd47ea20d1652a8fa374c78f2fe11f3bf6f5a15ac2dff2ecfd436"))
+                                    invite.send(bytes.fromhex("050000001808e7b0beb20a1005200d2a0c08e7b0beb20a10e7b0beb20a"))
 
 
 
+
+####
 
 
 
