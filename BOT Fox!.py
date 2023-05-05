@@ -202,6 +202,8 @@ def getinfobyid(packet , user_id , client):
     #final_info_region
     #
 #--------------------------------------------------
+#id plyaer
+    time.sleep(2.0)
     pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]أيدي الاعب : [FFA500]""")
     client.send(bytes.fromhex(pyload_3))
     pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]أيدي الاعب : [FFA500]""")
@@ -210,19 +212,15 @@ def getinfobyid(packet , user_id , client):
     client.send(bytes.fromhex(pyload_3))
     pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{user_id}""")
     client.send(bytes.fromhex(pyload_3))
-        #reg
-        
-    pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]المنطقة : [FFA500]""")
+    #splach
+    pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]_______________________""")
     client.send(bytes.fromhex(pyload_3))
-    pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]المنطقة : [FFA500]""")
+    pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]_______________________""")
     client.send(bytes.fromhex(pyload_3))
-    pyload_3 = gen_msgv2_clan(packet , f"""[00FF00][b][c]{final_info_region}""")
-    client.send(bytes.fromhex(pyload_3))
-    pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{final_info_region}""")
-    client.send(bytes.fromhex(pyload_3))
+        #name
         
         
-        #
+    time.sleep(2.0)
     pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]إسم لاعب : [FFA500]""")
     client.send(bytes.fromhex(pyload_3))
     pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]إسم لاعب : [FFA500]""")
@@ -232,10 +230,36 @@ def getinfobyid(packet , user_id , client):
     pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{player_name}""")
     client.send(bytes.fromhex(pyload_3))
         
+        
+        #splach1
+    pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]_______________________""")
+    client.send(bytes.fromhex(pyload_3))
+    pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]_______________________""")
+    client.send(bytes.fromhex(pyload_3))
+        
+        
+        #region
+    time.sleep(2.0)
+    pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]المنطقة : [FFA500]""")
+    client.send(bytes.fromhex(pyload_3))
+    pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]المنطقة : [FFA500]""")
+    client.send(bytes.fromhex(pyload_3))
+    pyload_3 = gen_msgv2_clan(packet , f"""[00FF00][b][c]{final_info_region}""")
+    client.send(bytes.fromhex(pyload_3))
+    pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{final_info_region}""")
+    client.send(bytes.fromhex(pyload_3))
+        
         ##
+#splach2
 
+    pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]_______________________""")
+    client.send(bytes.fromhex(pyload_3))
+    pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]_______________________""")
+    client.send(bytes.fromhex(pyload_3))
         
         
+        #ban check
+    time.sleep(2.0)
     pyload_3 = gen_msgv2_clan(packet , f"""[00FFFF][b][c]حالة الاعب : """)
     client.send(bytes.fromhex(pyload_3))
     pyload_3 = gen_msgv2(packet , f"""[00FFFF][b][c]حالة الاعب : """)
@@ -245,7 +269,7 @@ def getinfobyid(packet , user_id , client):
         
         
         #
-    time.sleep(4.0)
+    
     pyload_3 = gen_msgv2_clan(packet , f"""[00FF00][b][c]{final_ban_msg}""")
     client.send(bytes.fromhex(pyload_3))
     pyload_3 = gen_msgv2(packet , f"""[00FF00][b][c]{final_ban_msg}""")
