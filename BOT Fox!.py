@@ -30,6 +30,7 @@ increase =False
 
 back=False
 ca=False
+mod=False
 socktion =None
 
 def str2hex(s:str):
@@ -611,6 +612,7 @@ class Proxy:
                     global s
                     global x
                     global ca
+                    global mod
                     global hidr
                     global cliee
                     global serversocket
@@ -731,6 +733,7 @@ class Proxy:
                         global packet
                         global socktion
                         global ca
+                        global mod
                         global increase ,back
                         dataS = remote.recv(999999)
                         
