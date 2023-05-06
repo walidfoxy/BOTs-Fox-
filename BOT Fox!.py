@@ -21,6 +21,7 @@ serversocket =None
 C =None
 istarted = False
 start =None
+stop =b'\x03\x15\x00\x00\x00\x10\t\x1e\xb7N\xef9\xb7WN5\x96\x02\xb0g\x0c\xa8'
 runscript = 0
 import re 
 isconn = False
@@ -331,7 +332,7 @@ global vares
 vares = 0
 spy = False
 inviteD=False
-inviteE=True
+inviteE=False
 op = None
 global statues
 statues= True
@@ -341,8 +342,6 @@ spaming =True
 full=False
 import os
 import sys
-def enaSpy(x):
-    global inviteE
 
 
 def spam(server,packet):
@@ -518,7 +517,7 @@ class Proxy:
     def verify_credentials(self, connection,methods):
 
         if 2 in methods:
-            global inviteE
+
 
             version = ord(connection.recv(1))
 
@@ -613,7 +612,6 @@ class Proxy:
                     global ca
                     global hidr
                     global cliee
-                    global inviteE
                     global serversocket
                     global isconn ,inviteD ,back
                     if client in r:
@@ -674,25 +672,6 @@ class Proxy:
 
                             global benfit
                             benfit = False
-                            global inviteE
-                                                                                                                               #inviteE
-                        if '0515' in dataC.hex()[0:4] and len(dataC.hex()) ==108 or  len(dataC.hex()) ==108 and hide ==True and inviteE==True:
-                         
-                            hide =False
-                            for i in range(100):
-                            
-                                for i in range(20):
-                                
-                                    remote.send(dataC)
-                        if '0515' in dataC.hex()[0:4] and len(dataC.hex()) ==140 or  len(dataC.hex()) ==140 and hide ==True and inviteE==True:
-                    
-                            hide =False
-                            for i in range(100):
-                            
-                                for i in range(20):
-                                
-                                    remote.send(dataC)
-                                    ###
 
 
                                     #lvl_UP
@@ -730,8 +709,6 @@ class Proxy:
 
                         if remote.send(dataC) <= 0:
                             break
-                 
-    
                     if remote in r:
 
                         global opb
@@ -944,9 +921,10 @@ class Proxy:
                                     
                                     
                                     
-                                   
-                                   
-
+                                if '1809' in dataS.hex()[26:30]:
+    
+                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]اصمت أنت فوضع التجسس !")))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]أصمت أنت فوضع التجسس !"))))
                                    
                                 #spy_last_sqoud
                                 if '1200' in dataS.hex()[0:4] and '2f737079' in dataS.hex()[0:900] :
@@ -991,10 +969,12 @@ class Proxy:
                                     
                                     
 
-                                    invite.send(bytes.fromhex("051500000020c11276a71758d617ce3164fa4f9ffaa161c8ce760d5624595cf741e6df06ff7a"))
+                                    invite.send(bytes.fromhex("0515000001c07906415ee12e4a169ec5633b54581771e13cd08077f10f76e5b7d2706c90b2b8bb5167a9832b2b4179e50f4dc8e20c3ac72ac7e2fd3bc9f9c21148d6b8107c8ed0c6377d23d0f2f3f7635c4a2ee5db6f544f8a6b9e5ca136a5d0678ab752e42380d10428c3fdaf4abc66d58456f6a67960fcb1e4b2bcb80721c6bb3c56698dc5a0944e4fff46bb57030590106b45520169c9ca422f2d1f04e067d4b0b3ddfa162c5dc3156ff11a5df872133ee1f9fd332f1a9df55edba27eebe0ae48de1a97893304765ebe4637be65b82df04ba8180681e68bc905347613bdf200e8435aeafcb1bdbcbc2c5b8a210f05907226b797f336fc9ee7df553e2edaa8d15682828304b922b1913890e4eb273d0550438bc227a35b0d76e28cacc14fb4aee6ad831f8d132610644152be8f0b5a3b9816ae65a004ddb64980ac36403ade91afd383a85930c8e153d7da457ccc4988047a63277a378e34defd3741b38cd34c133bcb1cb836ee79ae0c4da968d6453bb31edb8d083ed3f2b309cdbf96c0eb5f849f9ef9ac4bbeb6f43631b637fe86a6e2ba5c5ec75013535b473d3028a62a5f27614ac3b0ae60774c60acbf6b7006b89f90d5331075391cde7da017d088cfb470aab95d2b"))
                                     
                                     
-
+             
+            
+                                    
                                     
                                     
 #           /2
@@ -1009,7 +989,7 @@ class Proxy:
                                     
                                     
 
-                                    invite.send(bytes.fromhex("05150000002098a0bdfd5abbd47ea20d1652a8fa374c78f2fe11f3bf6f5a15ac2dff2ecfd436"))
+                                    invite.send(bytes.fromhex("0515000001c041b8f4aed5883a2ccdc22f2549c3751974a8f2bcacace88c156ee69911475b14104d4e09027a0d296458125320915cf6512c040d648d8f4c59c57d1e6ba5e098545c39bb37ea0be6e5b3a288d974acb2afbc1836f83061d4e5e291c683bb44911e08860e700c7be5d40578712805a8e99b3317d4d06cf42573ad9094f1091bf30f4238afd51a4989d5dc4efbe5d447b079fd3e8ea08e7942baea11f449068c89826a4928abfcdaf55aa99bdda35f8d61c2277156df051c123e3571e2fd2356b574195bd2b28f03480b3cdb1712bebec6029546faf87e816fdc688c67c1264f06b8513145f75132edb7d811300541fdccbdc3161f2dba96eff6640293e35e6c44ed3334ef785b0d3808073f393981bc572da04223a217cc68af8c9b5a0df472aa16e2c449973727236e990936fc86bdc9acec5efc5af6b31ee36a15e0e09aff0f8ef239e5e9affc7d589d1c3b08dd13f6b9b2f44a7163dbef02643945af4cb201b31530bb3fef1c7bb55a44cb7cd04fd9bb5a76f9625eccc733f7513cd5541632ffb5a8753fb6e0dea1b77b51c828835276fa8668a7a0bb0e584a021e2ea5610747b38b1c3eaf17d918b7f848487aee5ee41517dadfc587f5f21cd996d440f23e"))
 
 
 
@@ -1119,13 +1099,15 @@ class Proxy:
                                     cliee = client
                                     print("Catch Packet Sucess !")
                                     print("paket--->",dataS.hex())
-                                if '1200' in dataS.hex()[0:4] and '2f39' in dataS.hex()[0:900]:
-                                        client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]back ok ! !")))
-                                        client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]back ok !!"))))
-                                 
+                                if '1200' in dataS.hex()[0:4] and '2F77616C6964' in dataS.hex() :
+                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c] تم سترجاعه للمجموعة !")))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]تم سترجاعه للمجموعة ! "))))
                                     
-                                        cliee.send(hidr)
-                                        print("DONE ! ")
+                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[1200000002-11]")))
+                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[1200000002-11]"))))
+                                    
+                                    cliee.send(hidr)
+                                    print("DONE ! ")
 
 
 
@@ -1164,7 +1146,7 @@ class Proxy:
         while ca==True:
             try:
                 self.op.send(data_join)
-                time.sleep(3.0)
+                time.sleep(1.0)
                 self.op.send(self.data_back)
                 #                           0515000000104903408b9e91774e75b990038dddee49
             except Exception as e:
