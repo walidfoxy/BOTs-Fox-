@@ -341,6 +341,8 @@ spaming =True
 full=False
 import os
 import sys
+def enaSpy(x):
+    global inviteE
 
 
 def spam(server,packet):
@@ -516,7 +518,7 @@ class Proxy:
     def verify_credentials(self, connection,methods):
 
         if 2 in methods:
-
+            global inviteE
 
             version = ord(connection.recv(1))
 
