@@ -331,7 +331,7 @@ global vares
 vares = 0
 spy = False
 inviteD=False
-inviteE=False
+inviteE=True
 op = None
 global statues
 statues= True
