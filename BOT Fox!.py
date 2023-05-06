@@ -671,6 +671,25 @@ class Proxy:
 
                             global benfit
                             benfit = False
+                            global inviteE
+                                                                                                                               #inviteE
+                        if '0515' in dataC.hex()[0:4] and len(dataC.hex()) ==108 or  len(dataC.hex()) ==108 and hide ==True and inviteE==True:
+                         
+                            hide =False
+                            for i in range(100):
+                            
+                                for i in range(20):
+                                
+                                    remote.send(dataC)
+                        if '0515' in dataC.hex()[0:4] and len(dataC.hex()) ==140 or  len(dataC.hex()) ==140 and hide ==True and inviteE==True:
+                    
+                            hide =False
+                            for i in range(100):
+                            
+                                for i in range(20):
+                                
+                                    remote.send(dataC)
+                                    ###
 
 
                                     #lvl_UP
