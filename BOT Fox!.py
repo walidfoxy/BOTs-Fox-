@@ -613,6 +613,7 @@ class Proxy:
                     global ca
                     global hidr
                     global cliee
+                    global inviteE
                     global serversocket
                     global isconn ,inviteD ,back
                     if client in r:
