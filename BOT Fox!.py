@@ -709,6 +709,8 @@ class Proxy:
 
                         if remote.send(dataC) <= 0:
                             break
+                 
+    
                     if remote in r:
 
                         global opb
@@ -971,9 +973,7 @@ class Proxy:
                                     invite.send(bytes.fromhex("051500000020c11276a71758d617ce3164fa4f9ffaa161c8ce760d5624595cf741e6df06ff7a"))
                                     
                                     
-             
-            
-                                    
+
                                     
                                     
 #           /2
@@ -1098,15 +1098,13 @@ class Proxy:
                                     cliee = client
                                     print("Catch Packet Sucess !")
                                     print("paket--->",dataS.hex())
-                                if '1200' in dataS.hex()[0:4] and '2F77616C6964' in dataS.hex() :
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c] تم سترجاعه للمجموعة !")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]تم سترجاعه للمجموعة ! "))))
+                                if '1200' in dataS.hex()[0:4] and '2f39' in dataS.hex()[0:900]:
+                                        client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FF00][b][c]back ok ! !")))
+                                        client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FF00][b][c]back ok !!"))))
+                                 
                                     
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[1200000002-11]")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[1200000002-11]"))))
-                                    
-                                    cliee.send(hidr)
-                                    print("DONE ! ")
+                                        cliee.send(hidr)
+                                        print("DONE ! ")
 
 
 
@@ -1145,7 +1143,7 @@ class Proxy:
         while ca==True:
             try:
                 self.op.send(data_join)
-                time.sleep(1.0)
+                time.sleep(3.0)
                 self.op.send(self.data_back)
                 #                           0515000000104903408b9e91774e75b990038dddee49
             except Exception as e:
