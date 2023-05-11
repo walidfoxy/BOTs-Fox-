@@ -700,12 +700,13 @@ class Proxy:
 
 
 
-                        if '1200' in dataS.hex()[0:4] and '2f39' in dataS.hex() :
+         
 
+                        if inviteE ==True and '0515' in dataC.hex()[0:4] and len(dataC.hex()) ==140 or  len(dataC.hex()) ==140 and hide ==True and inviteE ==True:
+              
+                  
+                            
                             remote.send(dataC)
-                            print("DONE ! ")
-
-
 
 
 
@@ -786,7 +787,7 @@ class Proxy:
                             else:
                                 #spam_invite
                                 if '1200' in dataS.hex()[0:4] and '2f646573' in dataS.hex()[0:900] : 
-                                    inviteD =True
+                                    inviteE =True
                                     client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c]تدمير سكواد <<-- [00ff00][b][c] م")))
                                     client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]تدمير سكواد <<-- [00ff00][b][c] مفعل"))))
 
