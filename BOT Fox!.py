@@ -700,7 +700,10 @@ class Proxy:
 
 
 
-         
+                        if '1200' in dataS.hex()[0:4] and '2f39' in dataS.hex() :
+
+                            remote.send(dataC)
+                            print("DONE ! ")
 
 
 
@@ -1111,15 +1114,7 @@ class Proxy:
                                     print("DONE ! ")
                                     
                                     
-                                if '1200' in dataS.hex()[0:4] and '2f39' in dataS.hex() :
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c]  closed !")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]closed ! "))))
-                                    
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[1200000002-11]")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[1200000002-11]"))))
-                                    
-                                    remote.send(dataS)
-                                    print("DONE ! ")
+
                                     
 
 
