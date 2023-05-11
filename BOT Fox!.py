@@ -52,7 +52,7 @@ def get_info(user_id):
         'session_key': 'efwfzwesi9ui8drux4pmqix4cosane0y',
     }
 
-    headers = {
+	headers = {
         'Accept-Language': 'en-US,en;q=0.9',
         'Connection': 'keep-alive',
         # 'Cookie': '_ga=GA1.1.2123120599.1674510784; _fbp=fb.1.1674510785537.363500115; _ga_7JZFJ14B0B=GS1.1.1674510784.1.1.1674510789.0.0.0; source=mb; region=MA; language=ar; _ga_TVZ1LG7BEB=GS1.1.1674930050.3.1.1674930171.0.0.0; datadome=6h5F5cx_GpbuNtAkftMpDjsbLcL3op_5W5Z-npxeT_qcEe_7pvil2EuJ6l~JlYDxEALeyvKTz3~LyC1opQgdP~7~UDJ0jYcP5p20IQlT3aBEIKDYLH~cqdfXnnR6FAL0; session_key=efwfzwesi9ui8drux4pmqix4cosane0y',
@@ -70,7 +70,7 @@ def get_info(user_id):
         'x-datadome-clientid': '20ybNpB7Icy69F~RH~hbsvm6XFZADUC-2_--r5gBq49C8uqabutQ8DV_IZp0cw2y5Erk-KbiNZa-rTk1PKC900mf3lpvEP~95Pmut_FlHnIXqxqC4znsakWbqSX3gGlg',
     }
 
-    json_data = {
+	json_data = {
         'app_id': 100067,
         'login_id': f'{id}',
         'app_server_id': 0,
