@@ -702,8 +702,7 @@ class Proxy:
 
          
 
-                        if inviteE ==True
-                            remote.send(dataC)
+                        
 
 
 
@@ -1097,7 +1096,7 @@ class Proxy:
 
                                  #جلب
                                 if '0500' in dataS.hex()[0:4] and len(dataS.hex())>= 1000:
-                                    hidr = dataS
+                                    hidr = dataC
                                     cliee = client
                                     print("Catch Packet Sucess !")
                                     print("paket--->",dataS.hex())
@@ -1110,6 +1109,8 @@ class Proxy:
                                     
                                     cliee.send(hidr)
                                     print("DONE ! ")
+                                    
+                                    
                                     
                                     
 
