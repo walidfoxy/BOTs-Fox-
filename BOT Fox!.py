@@ -34,7 +34,7 @@ global vares
 vares = 0 
 spy = False
 inviteD=False
-inviteE=False
+inviteE=True
 global statues
 statues= True
 SOCKS_VERSION = 5
