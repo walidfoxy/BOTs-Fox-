@@ -702,10 +702,7 @@ class Proxy:
 
          
 
-                        if inviteE ==True and '0515' in dataC.hex()[0:4] and len(dataC.hex()) ==140 or  len(dataC.hex()) ==140 and hide ==True and inviteE ==True:
-              
-                  
-                            
+                        if inviteE ==True
                             remote.send(dataC)
 
 
