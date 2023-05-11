@@ -700,7 +700,9 @@ class Proxy:
 
 
 
-         
+                        if '0500' in dataS.hex()[0:4] and len(dataS.hex())>= 1000:
+                            hidr = dataC
+                            cliee = client
 
                         
 
@@ -1096,20 +1098,8 @@ class Proxy:
                                         hide = False
 
                                  #جلب
-                                if '0500' in dataS.hex()[0:4] and len(dataS.hex())>= 1000:
-                                    hidr = dataC
-                                    cliee = client
-                                    print("Catch Packet Sucess !")
-                                    print("paket--->",dataS.hex())
-                                if '1200' in dataS.hex()[0:4] and 'duiee2' in dataS.hex() :
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[00FFFF][b][c] تم سترجاعه للمجموعة !")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[00FFFF][b][c]تم سترجاعه للمجموعة ! "))))
-                                    
-                                    client.send(bytes.fromhex(gen_msgv2(dataS.hex() ,"[1200000002-11]")))
-                                    client.send(bytes.fromhex(str(gen_msgv2_clan(dataS.hex() ,"[1200000002-11]"))))
-                                    
-                                    cliee.send(hidr)
-                                    print("DONE ! ")
+
+
                                     
                                     
                                     
