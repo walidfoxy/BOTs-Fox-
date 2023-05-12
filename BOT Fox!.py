@@ -8,8 +8,8 @@
 # /spy
 # 3sby+id
 # fox
-print("done")
 
+print("done")
 
 invite  = None
 invite2  = None
@@ -1210,4 +1210,3 @@ def start_bot():
         sea=2
 
 
-start_bot()
