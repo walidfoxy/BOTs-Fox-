@@ -1210,4 +1210,3 @@ def start_bot():
         sea=2
 
 
-start_bot()
