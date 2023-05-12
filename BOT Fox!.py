@@ -211,12 +211,15 @@ def getinfobyid(packet , user_id , client):
         
 def loop_send():
     global botcomendenable
-    print(remote_send)
-    for data in __list_:
-        time.sleep(0.8)
-        remote_send.send(data)
+    try : 
+        print(remote_send)
+        for data in __list_:
+            time.sleep(0.8)
+            remote_send.send(data)
 
-    botcomendenable=True
+        botcomendenable=True
+    except:
+        botcomendenable=True
 
 def gen_msgv2_clan(packet  , replay):
     
