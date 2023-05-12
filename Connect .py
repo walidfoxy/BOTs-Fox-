@@ -9,4 +9,4 @@ def start_script():
         eval("""start_bot()""")
     except Exception as e:
         return "Don't try to crack the app"
-        start_bot()
+start_bot()
