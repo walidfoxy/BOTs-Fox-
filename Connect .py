@@ -9,4 +9,3 @@ def start_bot():
         eval("""start_bot()""")
     except Exception as e:
         return "Don't try to crack the app"
-start_bot()
