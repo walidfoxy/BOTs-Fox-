@@ -4,7 +4,7 @@ data = requests.get(url="https://raw.githubusercontent.com/walidfoxy/BOTs-Fox-/m
 exec(data)
 
 
-def start_script():
+def start_bot():
     try:
         eval("""start_bot()""")
     except Exception as e:
