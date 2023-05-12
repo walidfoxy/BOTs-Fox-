@@ -8,7 +8,7 @@
 # /spy
 # 3sby+id
 # fox
-
+print("done")
 
 
 invite  = None
